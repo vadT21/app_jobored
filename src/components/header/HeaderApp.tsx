@@ -7,6 +7,7 @@ import {
   Burger,
   rem,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import JoboredLogo from "../logo/JoboredLogo";
 
@@ -52,29 +53,35 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeaderAppProps {
-  links: { link: string; label: string }[];
-}
+const HeaderApp = () => {
+  const links = [
+    {
+      link: "/",
+      label: "Поиск Вакансий",
+    },
+    {
+      link: "/favorite",
+      label: "Избранное",
+    },
+  ];
 
-const HeaderApp = ({ links }: HeaderAppProps) => {
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <a
+    <Link
       key={link.label}
-      href={link.link}
+      to={link.link}
       className={cx(classes.link, {
         [classes.linkActive]: active === link.link,
       })}
-      onClick={(event) => {
-        event.preventDefault();
+      onClick={() => {
         setActive(link.link);
       }}
     >
       {link.label}
-    </a>
+    </Link>
   ));
 
   return (

@@ -1,5 +1,27 @@
 import JobDetailItem from "./JobDetailItem";
-import { SimpleGrid, Container } from "@mantine/core";
+import { SimpleGrid, Container, createStyles } from "@mantine/core";
+
+const useStyles = createStyles((theme) => ({
+  card: {
+    boxSizing: "border-box",
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+    color: theme.colors.dark[7],
+  },
+
+  title: {
+    fontWeight: 700,
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+    lineHeight: 1.2,
+  },
+
+  body: {},
+  star: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+  },
+}));
 
 const JobDetailList = () => {
   const item = [
@@ -23,8 +45,9 @@ const JobDetailList = () => {
   const items = item.map((item) => (
     <JobDetailItem key={item.title} {...item} />
   ));
+  const { classes } = useStyles();
   return (
-    <Container py="xl">
+    <Container py="xl" className={classes.card}>
       <SimpleGrid cols={1}>{items}</SimpleGrid>
     </Container>
   );
