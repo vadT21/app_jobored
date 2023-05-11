@@ -4,11 +4,13 @@ import HeaderApp from "./components/header/HeaderApp";
 
 import Rounting from "./routing/Rounting";
 import PasswordAuthResponse from "./API/auth";
-import { useTokenStore } from "./store";
+import { useTokenStore, useJobStore } from "./store";
 
 function App() {
   const addSecretToken = useTokenStore((state) => state.addSecretToken);
   const secretToken = useTokenStore((state) => state.secretToken);
+
+  const fetchCatalogues = useJobStore((state) => state.fetchCatalogues);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -19,6 +21,9 @@ function App() {
         }
       } catch (error) {
         console.error(error);
+      }
+      if (secretToken) {
+        await fetchCatalogues(secretToken);
       }
     }
     fetchData();
