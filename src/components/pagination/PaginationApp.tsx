@@ -11,6 +11,8 @@ const PaginationApp = ({
   changeCurrentPage,
   totalPage,
 }: PaginationAppProps) => {
+  console.log("render pagiantion");
+
   return (
     <Pagination
       boundaries={0}
