@@ -1,26 +1,58 @@
 import { Grid, Container } from "@mantine/core";
 import JobDetailList from "../components/jobcard/JobDetailList";
 import JobCardItem from "../components/jobcard/JobCardItem";
+import { useFavoritesStore, useJobStore, useTokenStore } from "../store";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const JobDetailPage = () => {
-  const item = {
-    id: 3,
-    image:
-      "https://images.unsplash.com/photo-1602080858428-57174f9431cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-    category: "technology",
-    title: "The best laptop for Frontend engineers in 2022",
-    date: "Feb 6th",
-    author: {
-      name: "Elsa Brown",
-      avatar:
-        "https://images.unsplash.com/photo-1628890923662-2cb23c2e0cfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80",
-    },
+  const { id } = useParams();
+  console.log(id);
+  const favorites = useFavoritesStore((state) => state.favoriteJobs);
+
+  interface T {
+    id: number;
+    profession: string | undefined;
+    town: { title: string | undefined };
+    type_of_work: { title: string | undefined };
+    payment_to: number | undefined;
+    payment_from: number | undefined;
+    currency: string | undefined;
+    favorite: boolean;
+  }
+
+  const token = useTokenStore((state) => state.secretToken);
+  const job = useJobStore((state) => state.job);
+
+  const fetchJob = useJobStore((state) => state.fetchJob);
+
+  const checkStar = (arr: T) => {
+    console.log(arr);
+    const index = favorites.findIndex((i) => i.id === arr.id);
+    if (index === -1) {
+      arr.favorite = true;
+    }
+    return arr;
   };
+  if (job) {
+    console.log("adsd", checkStar(job));
+  }
+
+  useEffect(() => {
+    try {
+      if (token) {
+        fetchJob(token, id);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
   return (
     <Container my="md" maw={773}>
       <Grid>
         <Grid.Col>
-          <JobCardItem {...item} />
+          {job ? <JobCardItem {...checkStar(job)} /> : <div>laoding</div>}
         </Grid.Col>
         <Grid.Col>
           <JobDetailList />

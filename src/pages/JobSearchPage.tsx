@@ -4,16 +4,19 @@ import SearchingApp from "../components/searching/SearchingApp";
 import JobCardList from "../components/jobcard/JobCardList";
 import PaginationApp from "../components/pagination/PaginationApp";
 import { useFavoritesStore, useJobStore, useTokenStore } from "../store";
-import { useEffect, useState } from "react";
-import JobRequestResponse from "../API/jobrequest";
+import { useEffect } from "react";
 
 const JobSearchPage = () => {
   const currentPage = useJobStore((state) => state.currentPage);
   const changeCurrentPage = useJobStore((state) => state.changeCurrentPage);
   const totalPage = useJobStore((state) => state.totalCountPage);
 
+  const loading = useJobStore((state) => state.loading);
+
   const jobs = useJobStore((state) => state.jobs);
   const fetchJobs = useJobStore((state) => state.fetchJobs);
+
+  const catalogues = useJobStore((state) => state.catalogues);
 
   const favorites = useFavoritesStore((state) => state.favoriteJobs);
 
@@ -29,12 +32,18 @@ const JobSearchPage = () => {
     }
   }, [currentPage]);
 
-  interface M {
+  interface T {
     id: number;
+    profession: string | undefined;
+    town: { title: string | undefined };
+    type_of_work: { title: string | undefined };
+    payment_to: number | undefined;
+    payment_from: number | undefined;
+    currency: string | undefined;
     favorite: boolean;
   }
 
-  const checkStar = <T extends { id: number; favorite: boolean }>(arr: T[]) => {
+  const checkStar = (arr: T[]) => {
     if (arr.length) {
       const res = arr.map((el) => {
         const index = favorites.findIndex((i) => i.id === el.id);
@@ -52,7 +61,11 @@ const JobSearchPage = () => {
     <Container my="md">
       <Grid>
         <Grid.Col span={4}>
-          <FilteringApp />
+          {loading ? (
+            <div>loading</div>
+          ) : (
+            <FilteringApp catalogues={catalogues} />
+          )}
         </Grid.Col>
         <Grid.Col span={8}>
           <Grid gutter="md">
@@ -60,7 +73,11 @@ const JobSearchPage = () => {
               <SearchingApp />
             </Grid.Col>
             <Grid.Col>
-              <JobCardList jobs={checkStar(jobs)} />
+              {loading ? (
+                <div>loading</div>
+              ) : (
+                <JobCardList jobs={checkStar(jobs)} />
+              )}
             </Grid.Col>
             <Grid.Col>
               <PaginationApp

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IconStar, IconMapPin } from "@tabler/icons-react";
 import { createStyles, Card, Text, Group, ActionIcon } from "@mantine/core";
 import { useFavoritesStore } from "../../store";
+import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -24,19 +25,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface ArticleCardVerticalProps {
+interface T {
   id: number;
-  firm_name: string;
-  profession: string;
-  town: {
-    title: string;
-  };
-  type_of_work: {
-    title: string;
-  };
-  payment_to: number;
-  payment_from: number;
-  currency: string;
+  profession: string | undefined;
+  town: { title: string | undefined };
+  type_of_work: { title: string | undefined };
+  payment_to: number | undefined;
+  payment_from: number | undefined;
+  currency: string | undefined;
   favorite: boolean;
 }
 
@@ -49,7 +45,7 @@ const JobCardItem = ({
   payment_from,
   currency,
   favorite,
-}: ArticleCardVerticalProps) => {
+}: T) => {
   const { classes } = useStyles();
 
   const toggleFavoriteJobs = useFavoritesStore(
@@ -76,26 +72,31 @@ const JobCardItem = ({
     toggleFavoriteJobs(job);
   };
 
+  const link = {
+    link: `/job/${id}`,
+  };
   return (
     <Card withBorder radius="md" p={24} className={classes.card}>
       <Group noWrap spacing={0}>
         <div className={classes.body}>
-          <Text className={classes.title} mt="xs" mb="md">
-            {profession}
-          </Text>
-          <Group noWrap spacing="xs" mt="xs" mb="md">
-            <Text size="xs"> з/п {town.title}</Text>
-            <Text size="xs" color="dimmed">
-              •
+          <Link to={link.link}>
+            <Text className={classes.title} mt="xs" mb="md">
+              {profession}
             </Text>
-            <Text size="xs" color="dimmed">
-              {type_of_work.title}
-            </Text>
-          </Group>
-          <Group mt="xs" mb="md">
-            <IconMapPin size={16} strokeWidth={1} color={"#000000"} />
-            <Text size="xs">{town.title}</Text>
-          </Group>
+            <Group noWrap spacing="xs" mt="xs" mb="md">
+              <Text size="xs"> з/п {town.title}</Text>
+              <Text size="xs" color="dimmed">
+                •
+              </Text>
+              <Text size="xs" color="dimmed">
+                {type_of_work.title}
+              </Text>
+            </Group>
+            <Group mt="xs" mb="md">
+              <IconMapPin size={16} strokeWidth={1} color={"#000000"} />
+              <Text size="xs">{town.title}</Text>
+            </Group>
+          </Link>
           <Group className={classes.star} onClick={handleStarClick}>
             <ActionIcon variant="transparent" radius="md" size={36}>
               <IconStar

@@ -39,7 +39,18 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-const FilteringApp = () => {
+interface Props {
+  catalogues: Cat[];
+}
+interface Cat {
+  key: number;
+  title: string;
+  title_rus: string;
+  title_trimmed: string;
+  url_rus: string;
+}
+
+const FilteringApp = ({ catalogues }: Props) => {
   const form = useForm({
     initialValues: {
       name: "",
@@ -53,6 +64,8 @@ const FilteringApp = () => {
       subject: (value) => value.trim().length === 0,
     },
   });
+
+  console.log("p2", catalogues);
 
   const { classes } = useStyles();
 
@@ -79,7 +92,7 @@ const FilteringApp = () => {
           </Button>
         </Flex>
 
-        <IndustryDropdown />
+        <IndustryDropdown catalogues={catalogues} />
         <SalaryScale />
 
         <Group mt="xl">
