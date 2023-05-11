@@ -50,7 +50,7 @@ interface Cat {
   url_rus: string;
 }
 
-const FilteringApp = ({ catalogues }: Props) => {
+const FilteringApp = () => {
   const form = useForm({
     initialValues: {
       name: "",
@@ -65,9 +65,8 @@ const FilteringApp = ({ catalogues }: Props) => {
     },
   });
 
-  console.log("p2", catalogues);
-
   const { classes } = useStyles();
+  console.log("render filtre");
 
   return (
     <div className={classes.wrapper}>
@@ -85,19 +84,19 @@ const FilteringApp = ({ catalogues }: Props) => {
             align="center"
             color="#232134"
           >
-            Get in touch
+            Фильтры
           </Title>
           <Button type="submit" size="md">
-            Send message
+            Сбросить все
           </Button>
         </Flex>
 
-        <IndustryDropdown catalogues={catalogues} />
+        <IndustryDropdown />
         <SalaryScale />
 
         <Group mt="xl">
           <Button type="submit" size="md" className={classes.control}>
-            Send message
+            Применить
           </Button>
         </Group>
       </form>
