@@ -1,29 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Select } from "@mantine/core";
+import { useJobStore } from "../../store";
 
-interface Cat {
-  key: number;
-  title: string;
-  title_rus: string;
-  title_trimmed: string;
-  url_rus: string;
-}
-interface Props {
-  catalogues: Cat[];
-}
-const IndustryDropdown = ({ catalogues }: Props) => {
-  const items = catalogues.length
-    ? catalogues.map((el) => ({
-        value: el.title,
-        label: el.title,
-        key: el.key,
-      }))
-    : [];
+const IndustryDropdown = () => {
+  const catalogues = useJobStore((state) => state.catalogues);
 
+  const catalogue = useJobStore((state) => state.catalogue);
+  const addCatalogue = useJobStore((state) => state.addCatalogue);
+
+  const [value, setValue] = useState<string | undefined>("");
+
+  const items = catalogues.map((el) => ({
+    value: el.title,
+    label: el.title,
+    key: el.key,
+  }));
   const handleChange = (value: string) => {
-    //тут возвращать
-    console.log(value);
+    const res = items.find((el) => el.value === value);
+    addCatalogue(res);
+    setValue(value);
   };
+
+  useEffect(() => {
+    if (catalogue) {
+      setValue(catalogue.value);
+    }
+  }, []);
 
   return (
     <Select
@@ -32,6 +34,7 @@ const IndustryDropdown = ({ catalogues }: Props) => {
       searchable
       nothingFound="No options"
       data={items}
+      value={value}
       onChange={handleChange}
       mt="md"
     />
