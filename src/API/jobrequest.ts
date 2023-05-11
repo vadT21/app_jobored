@@ -25,13 +25,19 @@ const JobRequestResponse = async (
   const url = `${API_DATA.base_url}/vacancies/?published=1&page=${
     page - 1
   }&count=4`;
+
+  const queryParams = {
+    catalogues: 15,
+    keywords: null,
+  };
+
   try {
     const response = await axios.get<JobRequestResponseI>(url, {
       headers: {
         ...headers,
         Authorization: `Bearer ${token}`,
       },
-      params: {},
+      params: queryParams,
     });
     const objects = response.data.objects;
     console.log("wrok api");
