@@ -1,9 +1,9 @@
 import { Grid, Container } from "@mantine/core";
-import JobDetailList from "../components/jobcard/JobDetailList";
 import JobCardItem from "../components/jobcard/JobCardItem";
 import { useFavoritesStore, useJobStore, useTokenStore } from "../store";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import JobDetailInfo from "../components/jobdetail/JobDetailInfo";
 
 const JobDetailPage = () => {
   const { id } = useParams();
@@ -19,24 +19,22 @@ const JobDetailPage = () => {
     payment_from: number | undefined;
     currency: string | undefined;
     favorite: boolean;
+    vacancyRichText: string;
   }
 
   const token = useTokenStore((state) => state.secretToken);
   const job = useJobStore((state) => state.job);
 
   const fetchJob = useJobStore((state) => state.fetchJob);
+  const removeJob = useJobStore((state) => state.removeJob);
 
   const checkStar = (arr: T) => {
-    console.log(arr);
     const index = favorites.findIndex((i) => i.id === arr.id);
     if (index === -1) {
       arr.favorite = true;
     }
     return arr;
   };
-  if (job) {
-    console.log("adsd", checkStar(job));
-  }
 
   useEffect(() => {
     try {
@@ -46,7 +44,10 @@ const JobDetailPage = () => {
     } catch (error) {
       console.error(error);
     }
+    return removeJob();
   }, []);
+
+  const a = job?.vacancyRichText;
 
   return (
     <Container my="md" maw={773}>
@@ -55,7 +56,7 @@ const JobDetailPage = () => {
           {job ? <JobCardItem {...checkStar(job)} /> : <div>laoding</div>}
         </Grid.Col>
         <Grid.Col>
-          <JobDetailList />
+          <JobDetailInfo value={a} />
         </Grid.Col>
       </Grid>
     </Container>

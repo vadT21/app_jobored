@@ -11,61 +11,11 @@ const JobSearchPage = () => {
   const changeCurrentPage = useJobStore((state) => state.changeCurrentPage);
   const totalPage = useJobStore((state) => state.totalCountPage);
 
-  const loading = useJobStore((state) => state.loading);
-
-  const jobs = useJobStore((state) => state.jobs);
-  const fetchJobs = useJobStore((state) => state.fetchJobs);
-
-  const catalogues = useJobStore((state) => state.catalogues);
-
-  const favorites = useFavoritesStore((state) => state.favoriteJobs);
-
-  const secretToken = useTokenStore((state) => state.secretToken);
-
-  useEffect(() => {
-    try {
-      if (secretToken) {
-        fetchJobs(secretToken, currentPage);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }, [currentPage]);
-
-  interface T {
-    id: number;
-    profession: string | undefined;
-    town: { title: string | undefined };
-    type_of_work: { title: string | undefined };
-    payment_to: number | undefined;
-    payment_from: number | undefined;
-    currency: string | undefined;
-    favorite: boolean;
-  }
-
-  const checkStar = (arr: T[]) => {
-    if (arr.length) {
-      const res = arr.map((el) => {
-        const index = favorites.findIndex((i) => i.id === el.id);
-        if (index === -1) {
-          el.favorite = true;
-        }
-        return el;
-      });
-      return res;
-    }
-    return arr;
-  };
-
   return (
     <Container my="md">
       <Grid>
         <Grid.Col span={4}>
-          {loading ? (
-            <div>loading</div>
-          ) : (
-            <FilteringApp catalogues={catalogues} />
-          )}
+          <FilteringApp />
         </Grid.Col>
         <Grid.Col span={8}>
           <Grid gutter="md">
@@ -73,11 +23,7 @@ const JobSearchPage = () => {
               <SearchingApp />
             </Grid.Col>
             <Grid.Col>
-              {loading ? (
-                <div>loading</div>
-              ) : (
-                <JobCardList jobs={checkStar(jobs)} />
-              )}
+              <JobCardList />
             </Grid.Col>
             <Grid.Col>
               <PaginationApp
