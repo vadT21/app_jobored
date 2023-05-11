@@ -34,6 +34,7 @@ interface T {
   payment_from: number | undefined;
   currency: string | undefined;
   favorite: boolean;
+  vacancyRichText: string;
 }
 
 const JobCardItem = ({
@@ -45,6 +46,7 @@ const JobCardItem = ({
   payment_from,
   currency,
   favorite,
+  vacancyRichText,
 }: T) => {
   const { classes } = useStyles();
 
