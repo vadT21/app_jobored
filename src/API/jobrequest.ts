@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_DATA } from "../constants/apiData";
 
 interface JobRequestResponseI {
+  total: number;
   objects: {
     id: number;
     profession: string | undefined;
@@ -11,12 +12,20 @@ interface JobRequestResponseI {
     payment_from: number | undefined;
     currency: string | undefined;
     favorite: boolean;
+    vacancyRichText: string;
   }[];
+}
+interface Param {
+  keywords: string | undefined;
+  payment_from: number | "";
+  payment_to: number | "";
+  catalogue: number | null | undefined;
 }
 
 const JobRequestResponse = async (
   token: string,
   page: number,
+  params: Param,
 ): Promise<JobRequestResponseI> => {
   const headers = {
     ...API_DATA.headers,
@@ -27,8 +36,7 @@ const JobRequestResponse = async (
   }&count=4`;
 
   const queryParams = {
-    catalogues: 15,
-    keywords: null,
+    ...params,
   };
 
   try {
@@ -39,10 +47,8 @@ const JobRequestResponse = async (
       },
       params: queryParams,
     });
-    const objects = response.data.objects;
-    console.log("wrok api");
-    console.log(objects);
-    return { objects };
+    const objects = response.data;
+    return objects;
   } catch (error) {
     console.error("Error:", error);
     throw error;
