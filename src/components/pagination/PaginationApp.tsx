@@ -1,16 +1,16 @@
 import { Pagination } from "@mantine/core";
 
-interface PaginationAppProps {
+interface Props {
   currentPage: number;
-  changeCurrentPage: (page: number) => void;
   totalPage: number;
+  changeCurrentPage: (page: number) => void;
 }
 
 const PaginationApp = ({
   currentPage,
   changeCurrentPage,
   totalPage,
-}: PaginationAppProps) => {
+}: Props) => {
   console.log("render pagiantion");
 
   return (

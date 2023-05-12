@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { NumberInput } from "@mantine/core";
 import { useJobStore } from "../../store";
 
@@ -9,22 +8,13 @@ const SalaryScale = () => {
   const salaryTo = useJobStore((state) => state.salaryTo);
   const changeSalaryTo = useJobStore((state) => state.changeSalaryTo);
 
-  const [fromValue, setFromValue] = useState<number | "">("");
-  const [toValue, setToValue] = useState<number | "">("");
-
   const handleChangeFromValue = (value: number | "") => {
-    setFromValue(value);
     changeSalaryFrom(value);
   };
   const handleChangeToValue = (value: number | "") => {
-    setToValue(value);
     changeSalaryTo(value);
   };
 
-  useEffect(() => {
-    setFromValue(salaryFrom);
-    setToValue(salaryTo);
-  }, []);
   return (
     <>
       <div className="Ocl">
@@ -37,7 +27,7 @@ const SalaryScale = () => {
           sx={{ marginBottom: 10 }}
           step={1}
           min={0}
-          value={fromValue}
+          value={salaryFrom}
           onChange={handleChangeFromValue}
         />
         <NumberInput
@@ -47,7 +37,7 @@ const SalaryScale = () => {
           min={0}
           stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
           sx={{ marginBottom: 20 }}
-          value={toValue}
+          value={salaryTo}
           onChange={handleChangeToValue}
         />
       </div>

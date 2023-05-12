@@ -1,32 +1,31 @@
 import { Grid, Container } from "@mantine/core";
 import JobCardItem from "../components/jobcard/JobCardItem";
 import { useFavoritesStore, useJobStore, useTokenStore } from "../store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import JobDetailInfo from "../components/jobdetail/JobDetailInfo";
+import JobDetailDescription from "../components/jobdetail/JobDetailDescription";
+
+interface T {
+  id: number;
+  profession: string | undefined;
+  town: { title: string | undefined };
+  type_of_work: { title: string | undefined };
+  payment_to: number | undefined;
+  payment_from: number | undefined;
+  currency: string | undefined;
+  favorite: boolean;
+  vacancyRichText: string;
+}
 
 const JobDetailPage = () => {
   const { id } = useParams();
   console.log(id);
   const favorites = useFavoritesStore((state) => state.favoriteJobs);
 
-  interface T {
-    id: number;
-    profession: string | undefined;
-    town: { title: string | undefined };
-    type_of_work: { title: string | undefined };
-    payment_to: number | undefined;
-    payment_from: number | undefined;
-    currency: string | undefined;
-    favorite: boolean;
-    vacancyRichText: string;
-  }
-
   const token = useTokenStore((state) => state.secretToken);
-  const job = useJobStore((state) => state.job);
 
-  const fetchJob = useJobStore((state) => state.fetchJob);
-  const removeJob = useJobStore((state) => state.removeJob);
+  const fetchJobDetail = useJobStore((state) => state.fetchJobDetail);
 
   const checkStar = (arr: T) => {
     const index = favorites.findIndex((i) => i.id === arr.id);
@@ -36,27 +35,34 @@ const JobDetailPage = () => {
     return arr;
   };
 
+  const [jobTest, setJobTest] = useState<T | undefined>();
   useEffect(() => {
-    try {
-      if (token) {
-        fetchJob(token, id);
+    async function getJob() {
+      try {
+        if (token) {
+          const job = await fetchJobDetail(token, id);
+          setJobTest(job);
+        }
+      } catch (error: any) {
+        console.log(error);
       }
-    } catch (error) {
-      console.error(error);
     }
-    return removeJob();
+    getJob();
   }, []);
 
-  const a = job?.vacancyRichText;
-
+  console.log("jb", jobTest);
   return (
     <Container my="md" maw={773}>
       <Grid>
         <Grid.Col>
-          {job ? <JobCardItem {...checkStar(job)} /> : <div>laoding</div>}
+          {jobTest ? (
+            <JobDetailInfo {...checkStar(jobTest)} />
+          ) : (
+            <div>laoding</div>
+          )}
         </Grid.Col>
         <Grid.Col>
-          <JobDetailInfo value={a} />
+          <JobDetailDescription value={jobTest?.vacancyRichText} />
         </Grid.Col>
       </Grid>
     </Container>

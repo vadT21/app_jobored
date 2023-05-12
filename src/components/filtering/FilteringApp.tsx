@@ -1,22 +1,12 @@
-import {
-  TextInput,
-  Textarea,
-  SimpleGrid,
-  Group,
-  Title,
-  Button,
-  Flex,
-  createStyles,
-  rem,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
+import React from "react";
+import { Group, Title, Button, Flex, createStyles, rem } from "@mantine/core";
 import IndustryDropdown from "./IndustryDropdown";
 import SalaryScale from "./SalaryScale";
 
 const useStyles = createStyles((theme) => {
   return {
     wrapper: {
-      display: "flex",
+      flexDirection: "column",
       backgroundColor:
         theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
       borderRadius: theme.radius.lg,
@@ -39,43 +29,13 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-interface Props {
-  catalogues: Cat[];
-}
-interface Cat {
-  key: number;
-  title: string;
-  title_rus: string;
-  title_trimmed: string;
-  url_rus: string;
-}
-
-const FilteringApp = () => {
-  const form = useForm({
-    initialValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
-    validate: {
-      name: (value) => value.trim().length < 2,
-      email: (value) => !/^\S+@\S+$/.test(value),
-      subject: (value) => value.trim().length === 0,
-    },
-  });
-
+const FilteringAppC = () => {
   const { classes } = useStyles();
   console.log("render filtre");
 
   return (
-    <div className={classes.wrapper}>
-      <form
-        className={classes.form}
-        onSubmit={form.onSubmit(() => {
-          console.log(1);
-        })}
-      >
+    <Flex className={classes.wrapper}>
+      <Group>
         <Flex justify="space-between" align="center" wrap="wrap">
           <Title
             order={2}
@@ -86,22 +46,23 @@ const FilteringApp = () => {
           >
             Фильтры
           </Title>
-          <Button type="submit" size="md">
-            Сбросить все
-          </Button>
+          <Button size="md">Сбросить все</Button>
         </Flex>
+      </Group>
 
+      <Group>
         <IndustryDropdown />
         <SalaryScale />
+      </Group>
 
-        <Group mt="xl">
-          <Button type="submit" size="md" className={classes.control}>
-            Применить
-          </Button>
-        </Group>
-      </form>
-    </div>
+      <Group mt="xl">
+        <Button size="md" className={classes.control}>
+          Применить
+        </Button>
+      </Group>
+    </Flex>
   );
 };
 
+const FilteringApp = React.memo(FilteringAppC);
 export default FilteringApp;

@@ -1,26 +1,20 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { TextInput, Button } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { useJobStore } from "../../store";
 
-const SearchingApp = () => {
+const SearchingAppX = () => {
   const keywords = useJobStore((state) => state.keywords);
   const addKeywords = useJobStore((state) => state.addKeywords);
-
-  const [value, setValue] = useState("");
-
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
-    addKeywords(value);
+    addKeywords(event.currentTarget.value);
   };
 
-  useEffect(() => {
-    if (keywords) {
-      setValue(keywords);
-    }
-  }, []);
-
   const addParams = useJobStore((state) => state.addParams);
+  const handleAddParams = () => {
+    addParams();
+  };
+
   console.log("render search");
 
   return (
@@ -29,15 +23,15 @@ const SearchingApp = () => {
       radius="md"
       size="md"
       placeholder="Search questions"
-      value={value}
+      value={keywords}
       onChange={handleClick}
       rightSection={
-        <Button onClick={addParams} size="xs" ml="-60px" radius="md">
+        <Button onClick={handleAddParams} size="xs" ml="-60px" radius="md">
           Поиск
         </Button>
       }
     />
   );
 };
-
+const SearchingApp = React.memo(SearchingAppX);
 export default SearchingApp;
