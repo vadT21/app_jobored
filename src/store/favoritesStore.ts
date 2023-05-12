@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import JobRequestResponse from "../API/jobrequest";
 
 interface FavoriteJobState {
   loading: boolean;
@@ -31,18 +30,16 @@ export const useFavoritesStore = create<FavoriteJobState>()(
         favoriteJobs: [],
         toggleFavoriteJobs: (jobs) =>
           set((state) => {
-            console.log("work state");
-            const array = state.favoriteJobs;
-
-            const index = array.findIndex((i) => i.id === jobs.id);
-
+            const index = state.favoriteJobs.findIndex(
+              (el) => el.id === jobs.id,
+            );
             if (index === -1) {
               jobs.favorite = true;
-              return { favoriteJobs: [...array, jobs] };
+              return { favoriteJobs: [...state.favoriteJobs, jobs] };
             } else {
               jobs.favorite = false;
-              array.splice(index, 1);
-              return { favoriteJobs: [...array] };
+              state.favoriteJobs.splice(index, 1);
+              return { favoriteJobs: [...state.favoriteJobs] };
             }
           }),
       }),

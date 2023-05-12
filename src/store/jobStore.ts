@@ -14,10 +14,10 @@ interface JobState {
   jobs: T[];
   fetchJobs: (token: string, page: number, param: Param) => void;
 
-  job: T | null;
-  fetchJob: (token: string, id: string | undefined) => void;
-  removeJob: () => void;
-
+  fetchJobDetail: (
+    token: string,
+    id: string | undefined,
+  ) => Promise<T | undefined>;
   catalogues: Cat[];
   fetchCatalogues: (token: string) => void;
 
@@ -68,7 +68,7 @@ interface CatSokr {
 export const useJobStore = create<JobState>()((set, get) => ({
   currentPage: 1,
   changeCurrentPage: (page) => set({ currentPage: page }),
-  totalCountPage: 125, // нужно поменять потом логика для фильтров + поиска
+  totalCountPage: 125,
   loading: false,
   error: null,
   jobs: [],
@@ -88,20 +88,18 @@ export const useJobStore = create<JobState>()((set, get) => ({
       set({ loading: false });
     }
   },
-  job: null,
-  fetchJob: async (token, id) => {
+  fetchJobDetail: async (token, id) => {
     set({ loading: true });
     try {
       const res = await DetailJobRequestResponse(token, id);
       if (!res) throw new Error("Failed to fetch! Try again.");
-      set({ job: res, error: null });
+      return res;
     } catch (error: any) {
       set({ error: error.message });
     } finally {
       set({ loading: false });
     }
   },
-  removeJob: () => set({ job: null }),
   catalogues: [],
   fetchCatalogues: async (token) => {
     set({ loading: true });
