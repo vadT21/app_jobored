@@ -36,7 +36,10 @@ const JobRequestResponse = async (
   }&count=4`;
 
   const queryParams = {
-    ...params,
+    keywords: params.keywords,
+    payment_from: params.payment_from,
+    payment_to: params.payment_to,
+    catalogues: params.catalogue,
   };
 
   try {
