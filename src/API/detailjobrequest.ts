@@ -30,10 +30,8 @@ const DetailJobRequestResponse = async (
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     const objects = response.data;
     console.log("wrok api");
-    console.log(objects);
     return objects;
   } catch (error) {
     console.error("Error:", error);
