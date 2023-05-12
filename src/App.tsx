@@ -23,6 +23,8 @@ function App() {
         console.error(error);
       }
       if (secretToken) {
+        console.log("fetch cat");
+
         await fetchCatalogues(secretToken);
       }
     }
@@ -39,6 +41,7 @@ function App() {
         }
         styles={(theme) => ({
           main: {
+            padding: "calc(var(--mantine-header-height, 0px)) 0 0 0",
             backgroundColor:
               theme.colorScheme === "dark"
                 ? theme.colors.dark[8]
