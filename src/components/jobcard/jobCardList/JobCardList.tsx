@@ -1,6 +1,7 @@
-import { useFavoritesStore } from "../../store";
-import JobCardItem from "./JobCardItem";
-import { SimpleGrid, Container } from "@mantine/core";
+import { useFavoritesStore } from "../../../store";
+import JobCardItem from "../jobCardItem/JobCardItem";
+import { SimpleGrid } from "@mantine/core";
+import { useStyles } from "./JobCardList.style";
 
 interface T {
   id: number;
@@ -20,6 +21,7 @@ interface Props {
 const JobCardList = ({ jobs }: Props) => {
   console.log("render list");
 
+  const { classes } = useStyles();
   const favorites = useFavoritesStore((state) => state.favoriteJobs);
 
   const checkStar = (arr: T[]) => {
@@ -38,9 +40,9 @@ const JobCardList = ({ jobs }: Props) => {
   ));
 
   return (
-    <Container p={0}>
-      <SimpleGrid cols={1}>{items}</SimpleGrid>
-    </Container>
+    <SimpleGrid className={classes.cardList} cols={1}>
+      {items}
+    </SimpleGrid>
   );
 };
 
