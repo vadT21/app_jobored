@@ -1,10 +1,11 @@
-import { AppShell, Header } from "@mantine/core";
-import { useState, useEffect } from "react";
+import { AppShell, MantineProvider } from "@mantine/core";
+import { useEffect } from "react";
 import HeaderApp from "./components/header/HeaderApp";
 
 import Rounting from "./routing/Rounting";
 import PasswordAuthResponse from "./API/auth";
 import { useTokenStore, useJobStore } from "./store";
+import theme from "./styles/mantine.styles";
 
 function App() {
   const addSecretToken = useTokenStore((state) => state.addSecretToken);
@@ -32,25 +33,23 @@ function App() {
   }, []);
   return (
     <>
-      <AppShell
-        padding="md"
-        header={
-          <Header height={60} p="xs">
-            <HeaderApp />
-          </Header>
-        }
-        styles={(theme) => ({
-          main: {
-            padding: "calc(var(--mantine-header-height, 0px)) 0 0 0",
-            backgroundColor:
-              theme.colorScheme === "dark"
-                ? theme.colors.dark[8]
-                : theme.colors.gray[0],
-          },
-        })}
-      >
-        {<Rounting />}
-      </AppShell>
+      <MantineProvider withNormalizeCSS theme={theme}>
+        <AppShell
+          padding="md"
+          header={<HeaderApp />}
+          styles={(theme) => ({
+            main: {
+              padding: "124px 0 0 0",
+              backgroundColor:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[8]
+                  : theme.colors.gray[0],
+            },
+          })}
+        >
+          {<Rounting />}
+        </AppShell>
+      </MantineProvider>
     </>
   );
 }
