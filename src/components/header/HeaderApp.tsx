@@ -1,57 +1,9 @@
 import { useState } from "react";
-import {
-  createStyles,
-  Header,
-  Container,
-  Group,
-  Burger,
-  rem,
-} from "@mantine/core";
+import { Header, Container, Paper, Burger } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
-import JoboredLogo from "../logo/JoboredLogo";
-
-const useStyles = createStyles((theme) => ({
-  header: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "100%",
-  },
-
-  links: {
-    [theme.fn.smallerThan("xs")]: {
-      display: "none",
-    },
-  },
-
-  burger: {
-    [theme.fn.largerThan("xs")]: {
-      display: "none",
-    },
-  },
-
-  link: {
-    display: "block",
-    lineHeight: 1,
-    padding: `${rem(8)} ${rem(12)}`,
-    borderRadius: theme.radius.sm,
-    textDecoration: "none",
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
-  },
-
-  linkActive: {
-    "&, &:hover": {
-      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
-        .color,
-    },
-  },
-}));
+import JoboredLogo from "../logoApp/JoboredLogo";
+import { useStyles } from "./HeaderApp.style";
 
 const HeaderApp = () => {
   const links = [
@@ -85,12 +37,12 @@ const HeaderApp = () => {
   ));
 
   return (
-    <Header height={60}>
-      <Container className={classes.header}>
+    <Header height={60} className={classes.header}>
+      <Container className={classes.wrapper}>
         <JoboredLogo />
-        <Group spacing={5} className={classes.links}>
+        <Paper component="nav" className={classes.links}>
           {items}
-        </Group>
+        </Paper>
 
         <Burger
           opened={opened}

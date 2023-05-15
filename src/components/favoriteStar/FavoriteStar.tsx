@@ -4,11 +4,7 @@ import { useFavoritesStore } from "../../store";
 import { IconStar } from "../icons";
 
 const useStyles = createStyles((theme) => ({
-  star: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-  },
+  star: {},
 }));
 
 interface T {
