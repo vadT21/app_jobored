@@ -1,9 +1,9 @@
 import { IconInterface } from "../../models";
 
 export const IconArrowDown: React.FC<IconInterface> = ({
-  width = "12",
+  width = "14",
   height = "6",
-  viewBox = "0 0 12 6",
+  viewBox = "0 0 14 6",
   fill = "none",
   stroke = "#ACADB9",
   strokeWidth = "1.5",

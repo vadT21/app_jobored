@@ -1,11 +1,11 @@
 import { IconInterface } from "../../models";
 
 export const IconArrowUp: React.FC<IconInterface> = ({
-  width = "12",
+  width = "14",
   height = "6",
-  viewBox = "0 0 12 6",
+  viewBox = "0 0 14 6",
   fill = "none",
-  stroke = "#ACADB9",
+  stroke = "#5E96FC",
   strokeWidth = "1.5",
 }) => {
   return (
