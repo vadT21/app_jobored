@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Grid, Container } from "@mantine/core";
-import JobCardList from "../components/jobcard/JobCardList";
+import JobCardList from "../components/jobcard/jobCardList/JobCardList";
 import PaginationApp from "../components/pagination/PaginationApp";
 import { useFavoritesStore } from "../store/";
 

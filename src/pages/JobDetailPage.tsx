@@ -1,5 +1,5 @@
 import { Grid, Container } from "@mantine/core";
-import JobCardItem from "../components/jobcard/JobCardItem";
+import JobCardItem from "../components/jobcard/jobCardItem/JobCardItem";
 import { useFavoritesStore, useJobStore, useTokenStore } from "../store";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
