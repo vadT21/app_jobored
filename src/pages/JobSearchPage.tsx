@@ -1,13 +1,33 @@
 import { useEffect } from "react";
-import { Grid, Container } from "@mantine/core";
+import { Grid, Container, createStyles } from "@mantine/core";
 import FilteringApp from "../components/filtering/FilteringApp";
 import SearchingApp from "../components/searching/SearchingApp";
-import JobCardList from "../components/jobcard/JobCardList";
+import JobCardList from "../components/jobcard/jobCardList/JobCardList";
 import PaginationApp from "../components/pagination/PaginationApp";
 import { useJobStore, useTokenStore } from "../store";
 
+const useStyles = createStyles((theme) => {
+  return {
+    container: {
+      padding: "0 162px",
+      maxWidth: 1440,
+    },
+    gridPage: {
+      gap: 10,
+    },
+    filtering: {
+      maxWidth: 335,
+    },
+    searchAndList: {
+      width: "100%",
+    },
+  };
+});
+
 const JobSearchPage = () => {
   console.log("render job search page");
+
+  const { classes } = useStyles();
 
   const jobs = useJobStore((state) => state.jobs);
   const fetchJobs = useJobStore((state) => state.fetchJobs);
@@ -28,17 +48,17 @@ const JobSearchPage = () => {
     }
   }, [currentPage, params]);
   return (
-    <Container my="md">
-      <Grid>
-        <Grid.Col span={4}>
+    <Container className={classes.container}>
+      <Grid className={classes.gridPage}>
+        <Grid.Col span={4} className={classes.filtering}>
           <FilteringApp />
         </Grid.Col>
         <Grid.Col span={8}>
-          <Grid gutter="md">
+          <Grid className={classes.searchAndList}>
             <Grid.Col>
               <SearchingApp />
             </Grid.Col>
-            <Grid.Col mih={796}>
+            <Grid.Col>
               <JobCardList jobs={jobs} />
             </Grid.Col>
             <Grid.Col>
