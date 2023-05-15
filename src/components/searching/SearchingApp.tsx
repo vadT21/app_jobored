@@ -1,7 +1,8 @@
 import React from "react";
 import { TextInput, Button } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
 import { useJobStore } from "../../store";
+import { useStyles } from "./SearchingApp.style";
+import { IconSearch } from "../icons";
 
 const SearchingAppX = () => {
   const keywords = useJobStore((state) => state.keywords);
@@ -9,7 +10,7 @@ const SearchingAppX = () => {
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     addKeywords(event.currentTarget.value);
   };
-
+  const { classes } = useStyles();
   const addParams = useJobStore((state) => state.addParams);
   const handleAddParams = () => {
     addParams();
@@ -19,14 +20,13 @@ const SearchingAppX = () => {
 
   return (
     <TextInput
-      icon={<IconSearch size="1.1rem" stroke={1.5} />}
-      radius="md"
-      size="md"
-      placeholder="Search questions"
+      classNames={classes}
+      icon={<IconSearch />}
+      placeholder="Введите название вакансии"
       value={keywords}
       onChange={handleClick}
       rightSection={
-        <Button onClick={handleAddParams} size="xs" ml="-60px" radius="md">
+        <Button className={classes.searchButton} onClick={handleAddParams}>
           Поиск
         </Button>
       }
