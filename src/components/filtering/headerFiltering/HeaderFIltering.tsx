@@ -1,4 +1,4 @@
-import { Paper, Title } from "@mantine/core";
+import { Container, Paper, Title } from "@mantine/core";
 import { useStyles } from "./HeaderFiltering.style";
 import ClearButton from "../../clearButton/ClearButton";
 
@@ -9,7 +9,9 @@ const HeaderFIltering = () => {
       <Title order={2} className={classes.title}>
         Фильтры
       </Title>
-      <ClearButton />
+      <Container className={classes.clearButtonPos}>
+        <ClearButton />
+      </Container>
     </Paper>
   );
 };

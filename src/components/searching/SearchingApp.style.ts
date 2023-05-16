@@ -17,17 +17,24 @@ export const useStyles = createStyles((theme) => ({
       gap: 0,
       justifyContent: "space-around",
     },
+    ":hover, :valid": {
+      borderColor: theme.colors.blue500,
+    },
   },
   input: {
     paddingLeft: "22px !important",
-    paddingTop: "4px !important",
+    paddingRight: "84px !important",
     border: "none",
     fontWeight: 400,
     fontSize: 14,
-    color: theme.colors.grey500,
+    caretColor: theme.colors.blue500,
+    color: theme.colors.black,
+    "::placeholder": {
+      color: theme.colors.grey500,
+    },
   },
   rightSection: {
-    paddingRight: 32,
+    paddingRight: 33,
   },
   searchButton: {
     height: 32,
@@ -36,5 +43,12 @@ export const useStyles = createStyles((theme) => ({
     color: theme.colors.white,
     background: theme.colors.blue500,
     borderRadius: 8,
+    padding: "0 20px",
+    "&: hover": {
+      background: theme.colors.blue400,
+    },
+    "&: active": {
+      background: theme.colors.blue600,
+    },
   },
 }));

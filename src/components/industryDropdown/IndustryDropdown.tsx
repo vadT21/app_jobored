@@ -9,8 +9,8 @@ const IndustryDropdown = () => {
 
   const catalogues = useJobStore((state) => state.catalogues);
 
-  const catalogue = useJobStore((state) => state.catalogue);
-  const addCatalogue = useJobStore((state) => state.addCatalogue);
+  const industry = useJobStore((state) => state.industry);
+  const addCatalogue = useJobStore((state) => state.addIndustry);
 
   const [value, setValue] = useState<string | undefined>("");
 
@@ -31,10 +31,11 @@ const IndustryDropdown = () => {
   };
 
   useEffect(() => {
-    if (catalogue) {
-      setValue(catalogue.value);
+    setValue("");
+    if (industry) {
+      setValue(industry.value);
     }
-  }, []);
+  }, [industry]);
 
   return (
     <Select

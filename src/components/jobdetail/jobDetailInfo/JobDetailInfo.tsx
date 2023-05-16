@@ -1,13 +1,11 @@
 import { Card, Text, Group, Title, Container } from "@mantine/core";
-import { Link } from "react-router-dom";
 import FavoriteStar from "../../favoriteStar/FavoriteStar";
 import { IconLocation } from "../../icons";
-import { useStyles } from "./JobCardItem.style";
+import { useStyles } from "./JobDetailInfo.style";
 import SalaryInfo from "../../salaryInfo/SalaryInfo";
 import { JobDataI } from "../../../models";
-import { ROUTE_LINKS } from "../../../constants";
 
-const JobCardItem = ({
+const JobDetailInfo = ({
   id,
   type_of_work,
   profession,
@@ -28,14 +26,12 @@ const JobCardItem = ({
     currency,
     favorite,
   };
-  const link = `${ROUTE_LINKS.detailPage.link}/${id}`;
   return (
     <Card className={classes.card}>
-      <Link to={link} className={classes.link}>
-        <Title order={3} className={classes.title}>
-          {profession}
-        </Title>
-      </Link>
+      <Title order={3} className={classes.title}>
+        {profession}
+      </Title>
+
       <Group className={classes.information}>
         <SalaryInfo
           payment_from={payment_from}
@@ -56,4 +52,4 @@ const JobCardItem = ({
   );
 };
 
-export default JobCardItem;
+export default JobDetailInfo;

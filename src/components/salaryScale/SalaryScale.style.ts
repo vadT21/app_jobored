@@ -12,7 +12,6 @@ export const useStyles = createStyles((theme) => ({
     fontSize: 16,
     color: theme.colors.black,
     lineHeight: 1.1875,
-    letterSpacing: 0.5,
     paddingBottom: 6,
   },
   wrapper: {

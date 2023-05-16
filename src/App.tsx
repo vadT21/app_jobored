@@ -1,6 +1,6 @@
 import { AppShell, MantineProvider } from "@mantine/core";
 import { useEffect } from "react";
-import HeaderApp from "./components/header/HeaderApp";
+import HeaderApp from "./components/headerApp/HeaderApp";
 
 import Rounting from "./routing/Rounting";
 import PasswordAuthResponse from "./API/auth";
@@ -44,6 +44,9 @@ function App() {
                 theme.colorScheme === "dark"
                   ? theme.colors.dark[8]
                   : theme.colors.gray[0],
+              [theme.fn.smallerThan("sm")]: {
+                padding: "96px 0 0 0",
+              },
             },
           })}
         >

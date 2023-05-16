@@ -1,22 +1,9 @@
-import { createStyles, Group, ActionIcon } from "@mantine/core";
+import { Group, ActionIcon } from "@mantine/core";
 import { useState } from "react";
 import { useFavoritesStore } from "../../store";
 import { IconStar } from "../icons";
-
-const useStyles = createStyles((theme) => ({
-  star: {},
-}));
-
-interface T {
-  id: number;
-  profession: string | undefined;
-  town: { title: string | undefined };
-  type_of_work: { title: string | undefined };
-  payment_to: number | undefined;
-  payment_from: number | undefined;
-  currency: string | undefined;
-  favorite: boolean;
-}
+import { useStyles } from "./FavoriteStar.style";
+import { JobDataI } from "../../models";
 
 const FavoriteStar = ({
   id,
@@ -27,7 +14,7 @@ const FavoriteStar = ({
   payment_from,
   currency,
   favorite,
-}: T) => {
+}: JobDataI) => {
   const { classes } = useStyles();
 
   const [isActive, setIsActive] = useState(favorite);
@@ -52,9 +39,12 @@ const FavoriteStar = ({
   };
 
   return (
-    <Group className={classes.star} onClick={handleStarClick}>
+    <Group onClick={handleStarClick}>
       <ActionIcon variant="transparent" radius="md" size={36}>
-        <IconStar fill={isActive ? "#5E96FC" : "#7c2207"} />
+        <IconStar
+          fill={isActive ? "#5E96FC" : "#FFFFFF"}
+          stroke={isActive ? "#5E96FC" : "#ACADB9"}
+        />
       </ActionIcon>
     </Group>
   );

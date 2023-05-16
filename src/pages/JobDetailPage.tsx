@@ -1,22 +1,10 @@
 import { Grid, Container } from "@mantine/core";
-import JobCardItem from "../components/jobcard/jobCardItem/JobCardItem";
 import { useFavoritesStore, useJobStore, useTokenStore } from "../store";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import JobDetailInfo from "../components/jobdetail/JobDetailInfo";
-import JobDetailDescription from "../components/jobdetail/JobDetailDescription";
-
-interface T {
-  id: number;
-  profession: string | undefined;
-  town: { title: string | undefined };
-  type_of_work: { title: string | undefined };
-  payment_to: number | undefined;
-  payment_from: number | undefined;
-  currency: string | undefined;
-  favorite: boolean;
-  vacancyRichText: string;
-}
+import JobDetailInfo from "../components/jobdetail/jobDetailInfo/JobDetailInfo";
+import JobDetailDescription from "../components/jobdetail/jobDetailDescription/JobDetailDescription";
+import { JobDataI } from "../models";
 
 const JobDetailPage = () => {
   const { id } = useParams();
@@ -27,7 +15,7 @@ const JobDetailPage = () => {
 
   const fetchJobDetail = useJobStore((state) => state.fetchJobDetail);
 
-  const checkStar = (arr: T) => {
+  const checkStar = (arr: JobDataI) => {
     const index = favorites.findIndex((i) => i.id === arr.id);
     if (index === -1) {
       arr.favorite = true;
@@ -35,7 +23,7 @@ const JobDetailPage = () => {
     return arr;
   };
 
-  const [jobTest, setJobTest] = useState<T | undefined>();
+  const [jobTest, setJobTest] = useState<JobDataI | undefined>();
   useEffect(() => {
     async function getJob() {
       try {
@@ -52,7 +40,7 @@ const JobDetailPage = () => {
 
   console.log("jb", jobTest);
   return (
-    <Container my="md" maw={773}>
+    <Container maw={773}>
       <Grid>
         <Grid.Col>
           {jobTest ? (

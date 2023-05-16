@@ -32,7 +32,6 @@ export const useStyles = createStyles((theme) => ({
     padding: 0,
     paddingTop: 2,
     gap: 60,
-    letterSpacing: 1.25,
     [theme.fn.smallerThan("xs")]: {
       display: "none",
     },

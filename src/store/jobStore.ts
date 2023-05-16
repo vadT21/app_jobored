@@ -2,70 +2,9 @@ import { create } from "zustand";
 import JobRequestResponse from "../API/jobrequest";
 import DetailJobRequestResponse from "../API/detailjobrequest";
 import CatalogRequestResponse from "../API/catalogrequest";
+import { JobStoreStateI } from "../models";
 
-interface JobState {
-  loading: boolean;
-  error: any;
-
-  currentPage: number;
-  changeCurrentPage: (page: number) => void;
-  totalCountPage: number;
-
-  jobs: T[];
-  fetchJobs: (token: string, page: number, param: Param) => void;
-
-  fetchJobDetail: (
-    token: string,
-    id: string | undefined,
-  ) => Promise<T | undefined>;
-  catalogues: Cat[];
-  fetchCatalogues: (token: string) => void;
-
-  keywords: string | undefined;
-  addKeywords: (value: string | undefined) => void;
-  salaryFrom: number | "";
-  changeSalaryFrom: (value: number | "") => void;
-  salaryTo: number | "";
-  changeSalaryTo: (value: number | "") => void;
-  catalogue: CatSokr | null;
-  addCatalogue: (value: CatSokr | undefined) => void;
-  params: Param;
-  addParams: () => void;
-  removeParams: () => void;
-}
-
-interface Param {
-  keywords: string | undefined;
-  payment_from: number | "";
-  payment_to: number | "";
-  catalogue: number | null | undefined;
-}
-interface T {
-  id: number;
-  profession: string | undefined;
-  town: { title: string | undefined };
-  type_of_work: { title: string | undefined };
-  payment_to: number | undefined;
-  payment_from: number | undefined;
-  currency: string | undefined;
-  favorite: boolean;
-  vacancyRichText: string;
-}
-
-interface Cat {
-  key: number | undefined;
-  title: string;
-  title_rus: string;
-  title_trimmed: string;
-  url_rus: string;
-}
-
-interface CatSokr {
-  value: string | undefined;
-  label: string | undefined;
-  key: number | undefined;
-}
-export const useJobStore = create<JobState>()((set, get) => ({
+export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   currentPage: 1,
   changeCurrentPage: (page) => set({ currentPage: page }),
   totalCountPage: 125,
@@ -123,14 +62,14 @@ export const useJobStore = create<JobState>()((set, get) => ({
   salaryTo: "",
   changeSalaryTo: (value) => set({ salaryTo: value }),
 
-  catalogue: null,
-  addCatalogue: (value) => set({ catalogue: value }),
+  industry: null,
+  addIndustry: (value) => set({ industry: value }),
 
   params: {
     keywords: "",
     payment_from: "",
     payment_to: "",
-    catalogue: null,
+    industry: null,
   },
   addParams: () =>
     set({
@@ -138,7 +77,7 @@ export const useJobStore = create<JobState>()((set, get) => ({
         keywords: get().keywords,
         payment_from: get().salaryFrom,
         payment_to: get().salaryTo,
-        catalogue: get().catalogue?.key,
+        industry: get().industry?.key,
       },
       currentPage: 1,
     }),
@@ -148,8 +87,12 @@ export const useJobStore = create<JobState>()((set, get) => ({
         keywords: "",
         payment_from: "",
         payment_to: "",
-        catalogue: null,
+        industry: null,
       },
       currentPage: 1,
+      keywords: "",
+      salaryFrom: "",
+      salaryTo: "",
+      industry: null,
     }),
 }));

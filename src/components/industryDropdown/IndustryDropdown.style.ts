@@ -12,7 +12,6 @@ export const useStyles = createStyles((theme) => ({
     fontSize: 16,
     color: theme.colors.black,
     lineHeight: 1.1875,
-    letterSpacing: 0.7,
     marginTop: -0.5,
   },
   wrapper: {
@@ -22,24 +21,21 @@ export const useStyles = createStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     gap: 10,
-    border: `1px solid ${theme.colors.grey300}`,
-    borderRadius: 8,
-    background: theme.colors.white,
-    "&:hover, &:active": {
-      borderColor: theme.colors.blue500,
-    },
   },
   input: {
     cursor: "default",
-    border: "none",
+    height: "100%",
     fontWeight: 400,
     fontSize: 14,
-    height: 20,
     color: theme.colors.black,
-    paddingLeft: "12px !important",
+    padding: "0 26px 0 11px !important",
     caretColor: theme.colors.blue500,
-    "::placeholder": {
-      letterSpacing: 0.7,
+
+    border: `1px solid ${theme.colors.grey300}`,
+    borderRadius: 8,
+    background: theme.colors.white,
+    ":hover, :focus": {
+      borderColor: theme.colors.blue500,
     },
   },
   dropdown: {
@@ -54,13 +50,13 @@ export const useStyles = createStyles((theme) => ({
     },
   },
   item: {
-    "&:hover": {
+    ":hover": {
       background: theme.colors.blue100,
     },
-    "&:active": {
+    ":active": {
       backgroundColor: theme.colors.blue500,
     },
-    "&[data-selected]": {
+    "[data-selected]": {
       "&, &:hover": {
         backgroundColor: theme.colors.blue500,
         color: theme.colors.white,

@@ -3,8 +3,8 @@ import { IconEmptyState } from "../components/icons/index.ts";
 
 const useStyles = createStyles((theme) => ({
   root: {
-    paddingTop: "120px",
-    gap: "32px",
+    paddingTop: 78,
+    gap: 32,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
@@ -13,28 +13,24 @@ const useStyles = createStyles((theme) => ({
   title: {
     fontStyle: "normal",
     fontWeight: 700,
-    //fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontFamily: "Inter",
-    lineHeight: "29px",
-    fontSize: "24px",
-    color: "#343A40",
+    fontSize: 24,
+    color: theme.colors.grey900,
     // [theme.fn.smallerThan("sm")]: {
     //   fontSize: rem(32),
     // },
   },
 
   button: {
-    width: "164px",
-    height: "42px",
-    background: "#DEECFF",
-    borderRadius: "8px",
+    width: 164,
+    height: 42,
+    background: theme.colors.blue100,
+    borderRadius: 8,
 
-    color: "#3B7CD3",
+    color: theme.colors.blue600,
     fontFamily: "Open Sans",
     fontStyle: "normal",
     fontWeight: 600,
-    fontSize: "14px",
-    lineHeight: "155%",
+    fontSize: 14,
   },
 }));
 

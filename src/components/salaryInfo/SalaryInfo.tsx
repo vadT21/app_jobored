@@ -1,11 +1,12 @@
 import { Text } from "@mantine/core";
-
 import { useStyles } from "./SalaryInfo.style";
+
 interface SalaryInfoProps {
   payment_to?: number;
   payment_from?: number;
   currency?: string;
 }
+
 const SalaryInfo = ({
   payment_to,
   payment_from,

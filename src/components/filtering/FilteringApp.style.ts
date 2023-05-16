@@ -13,10 +13,18 @@ export const useStyles = createStyles((theme) => {
       borderRadius: 12,
       maxWidth: 315,
       margin: 0,
+      [theme.fn.smallerThan("sm")]: {
+        // flexDirection: "row",
+        maxWidth: "100%",
+      },
     },
 
     params: {
-      paddingTop: 12,
+      paddingTop: 8,
+      [theme.fn.smallerThan("sm")]: {
+        flexDirection: "row",
+        flex: "0 0 50%",
+      },
     },
     control: {
       width: "100%",
@@ -26,7 +34,6 @@ export const useStyles = createStyles((theme) => {
       color: theme.colors.white,
       fontWeight: 500,
       fontSize: 14,
-      letterSpacing: 1.25,
       "&: hover": {
         background: theme.colors.blue400,
       },

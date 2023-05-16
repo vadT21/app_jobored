@@ -11,8 +11,8 @@ export const useStyles = createStyles((theme) => ({
   title: {
     color: theme.colors.black,
     fontFamily: "Poppins",
-    fontStyle: "normal",
     fontWeight: 600,
     fontSize: 24,
+    letterSpacing: -0.33,
   },
 }));

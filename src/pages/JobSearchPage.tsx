@@ -11,15 +11,31 @@ const useStyles = createStyles((theme) => {
     container: {
       padding: "0 162px",
       maxWidth: 1440,
+      [theme.fn.smallerThan("lg")]: {
+        padding: "0 80px",
+      },
+      [theme.fn.smallerThan("md")]: {
+        padding: "0 40px",
+      },
+      [theme.fn.smallerThan("sm")]: {
+        padding: "0 10px",
+      },
     },
     gridPage: {
       gap: 10,
+      [theme.fn.smallerThan("sm")]: {
+        flexDirection: "column",
+      },
     },
     filtering: {
       maxWidth: 335,
+      [theme.fn.smallerThan("sm")]: {
+        maxWidth: "100%",
+      },
     },
     searchAndList: {
-      width: "100%",
+      maxWidth: "100%",
+      flex: 1,
     },
   };
 });
@@ -50,18 +66,18 @@ const JobSearchPage = () => {
   return (
     <Container className={classes.container}>
       <Grid className={classes.gridPage}>
-        <Grid.Col span={4} className={classes.filtering}>
+        <Grid.Col className={classes.filtering}>
           <FilteringApp />
         </Grid.Col>
-        <Grid.Col span={8}>
-          <Grid className={classes.searchAndList}>
+        <Grid.Col className={classes.searchAndList}>
+          <Grid>
             <Grid.Col>
               <SearchingApp />
             </Grid.Col>
             <Grid.Col>
               <JobCardList jobs={jobs} />
             </Grid.Col>
-            <Grid.Col>
+            <Grid.Col pt={32}>
               <PaginationApp
                 currentPage={currentPage}
                 changeCurrentPage={changeCurrentPage}

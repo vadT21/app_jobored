@@ -3,22 +3,12 @@ import { Grid, Container } from "@mantine/core";
 import JobCardList from "../components/jobcard/jobCardList/JobCardList";
 import PaginationApp from "../components/pagination/PaginationApp";
 import { useFavoritesStore } from "../store/";
-
-interface T {
-  id: number;
-  profession: string | undefined;
-  town: { title: string | undefined };
-  type_of_work: { title: string | undefined };
-  payment_to: number | undefined;
-  payment_from: number | undefined;
-  currency: string | undefined;
-  favorite: boolean;
-}
+import { JobDataI } from "../models";
 
 const JobFavoritePage = () => {
-  const [visibleFavoriteJobsTest, setVisibleFavoriteJobsTest] = useState<T[]>(
-    [],
-  );
+  const [visibleFavoriteJobsTest, setVisibleFavoriteJobsTest] = useState<
+    JobDataI[]
+  >([]);
   const favoriteJobs = useFavoritesStore((state) => state.favoriteJobs);
 
   const currentPage = useFavoritesStore((state) => state.currentPage);
@@ -35,12 +25,12 @@ const JobFavoritePage = () => {
   }, [currentPage]);
 
   return (
-    <Container my="md" maw={773}>
+    <Container maw={773}>
       <Grid>
-        <Grid.Col mih={796}>
+        <Grid.Col mih={596}>
           <JobCardList jobs={visibleFavoriteJobsTest} />
         </Grid.Col>
-        <Grid.Col>
+        <Grid.Col pt={96}>
           <PaginationApp
             currentPage={currentPage}
             changeCurrentPage={changeCurrentPage}

@@ -1,22 +1,11 @@
 import axios from "axios";
 import { API_DATA } from "../constants/apiData";
-
-interface JobRequestResponseI {
-  id: number;
-  profession: string | undefined;
-  town: { title: string | undefined };
-  type_of_work: { title: string | undefined };
-  payment_to: number | undefined;
-  payment_from: number | undefined;
-  currency: string | undefined;
-  favorite: boolean;
-  vacancyRichText: string;
-}
+import { JobDataI } from "../models";
 
 const DetailJobRequestResponse = async (
   token: string,
   id: string | undefined,
-): Promise<JobRequestResponseI> => {
+): Promise<JobDataI> => {
   const headers = {
     ...API_DATA.headers,
     "x-api-app-id": `${API_DATA.client_secret}`,
@@ -24,7 +13,7 @@ const DetailJobRequestResponse = async (
   const url = `${API_DATA.base_url}/vacancies/${id}`;
 
   try {
-    const response = await axios.get<JobRequestResponseI>(url, {
+    const response = await axios.get<JobDataI>(url, {
       headers: {
         ...headers,
         Authorization: `Bearer ${token}`,

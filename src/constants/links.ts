@@ -1,18 +1,18 @@
-export const JOB_SEARCH_LINK = {
-  title: "JobSearch",
-  link: "/",
-};
-
-export const JOB_DETAIL_LINK = {
-  title: "JobDetail",
-  link: "/job/:id",
-};
-export const JOB_FAVORITE_LINK = {
-  title: "JobFavorite",
-  link: "/favorite",
-};
-
-export const JOB_EMPTY_LINK = {
-  title: "JobEmpty",
-  link: "*",
+export const ROUTE_LINKS = {
+  searchPage: {
+    label: "Поиск Вакансий",
+    link: "/",
+  },
+  favoritePage: {
+    label: "Избранное",
+    link: "/favorite",
+  },
+  detailPage: {
+    label: "Детали Вакансии",
+    link: "/job",
+  },
+  emptyPage: {
+    label: "Пустая Страница",
+    link: "*",
+  },
 };

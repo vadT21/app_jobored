@@ -4,18 +4,10 @@ import { Link } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import JoboredLogo from "../logoApp/JoboredLogo";
 import { useStyles } from "./HeaderApp.style";
+import { ROUTE_LINKS } from "../../constants";
 
 const HeaderApp = () => {
-  const links = [
-    {
-      link: "/",
-      label: "Поиск Вакансий",
-    },
-    {
-      link: "/favorite",
-      label: "Избранное",
-    },
-  ];
+  const links = [ROUTE_LINKS.searchPage, ROUTE_LINKS.favoritePage];
 
   const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);

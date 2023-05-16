@@ -13,9 +13,12 @@ export const useStyles = createStyles((theme) => {
       fontWeight: 700,
       fontSize: 20,
       color: theme.colors.black,
-      lineHeight: 1,
-      marginTop: -5,
-      letterSpacing: 0.65,
+      marginTop: -4,
+    },
+    clearButtonPos: {
+      margin: 0,
+      padding: 0,
+      marginTop: -1,
     },
   };
 });

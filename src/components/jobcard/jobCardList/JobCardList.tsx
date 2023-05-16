@@ -2,29 +2,15 @@ import { useFavoritesStore } from "../../../store";
 import JobCardItem from "../jobCardItem/JobCardItem";
 import { SimpleGrid } from "@mantine/core";
 import { useStyles } from "./JobCardList.style";
+import { JobDataI } from "../../../models";
 
-interface T {
-  id: number;
-  profession: string | undefined;
-  town: { title: string | undefined };
-  type_of_work: { title: string | undefined };
-  payment_to: number | undefined;
-  payment_from: number | undefined;
-  currency: string | undefined;
-  favorite: boolean;
-}
-
-interface Props {
-  jobs: T[];
-}
-
-const JobCardList = ({ jobs }: Props) => {
+const JobCardList = ({ jobs }: { jobs: JobDataI[] }) => {
   console.log("render list");
 
   const { classes } = useStyles();
   const favorites = useFavoritesStore((state) => state.favoriteJobs);
 
-  const checkStar = (arr: T[]) => {
+  const checkStar = (arr: JobDataI[]) => {
     const res = arr.map((el) => {
       const index = favorites.findIndex((i) => i.id === el.id);
       if (index !== -1) {
@@ -35,7 +21,7 @@ const JobCardList = ({ jobs }: Props) => {
     return res;
   };
 
-  const items = checkStar(jobs).map((job: T) => (
+  const items = checkStar(jobs).map((job: JobDataI) => (
     <JobCardItem key={job.id} {...job} />
   ));
 

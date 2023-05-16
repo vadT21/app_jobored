@@ -1,4 +1,5 @@
 import { Pagination } from "@mantine/core";
+import { useStyles } from "./PaginationApp.style";
 
 interface Props {
   currentPage: number;
@@ -13,14 +14,16 @@ const PaginationApp = ({
 }: Props) => {
   console.log("render pagiantion");
 
+  const { classes } = useStyles();
   return (
     <Pagination
       boundaries={0}
-      siblings={2}
+      siblings={1}
       position="center"
       value={currentPage}
       onChange={changeCurrentPage}
       total={totalPage}
+      classNames={classes}
     />
   );
 };

@@ -8,6 +8,7 @@ const theme: MantineThemeOverride = {
     grey300: ["#D5D6DC"],
     grey500: ["#ACADB9"],
     grey600: ["#7B7C88"],
+    grey900: ["#343A40"],
     black: ["#232134"],
     blue100: ["#DEECFF"],
     blue200: ["#C9E0FF"],
@@ -17,6 +18,13 @@ const theme: MantineThemeOverride = {
     blue600: ["#3B7CD3"],
   },
   fontFamily: "Inter",
+  breakpoints: {
+    xs: "32em",
+    sm: "48em",
+    md: "64em",
+    lg: "75em",
+    xl: "88em",
+  },
 };
 
 export default theme;

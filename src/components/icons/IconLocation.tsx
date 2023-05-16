@@ -1,8 +1,8 @@
 import { IconInterface } from "../../models";
 
 export const IconLocation: React.FC<IconInterface> = ({
-  width = "18",
-  height = "21",
+  width = "15",
+  height = "18",
   viewBox = "0 0 18 21",
   stroke = "#ACADB9",
   strokeWidth = "1.5",
