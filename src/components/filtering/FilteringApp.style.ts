@@ -14,7 +14,7 @@ export const useStyles = createStyles((theme) => {
       maxWidth: 315,
       margin: 0,
       [theme.fn.smallerThan("sm")]: {
-        // flexDirection: "row",
+        display: "none",
         maxWidth: "100%",
       },
     },
@@ -39,6 +39,11 @@ export const useStyles = createStyles((theme) => {
       },
       "&: active": {
         background: theme.colors.blue600,
+      },
+    },
+    burger: {
+      [theme.fn.largerThan("sm")]: {
+        display: "none",
       },
     },
   };
