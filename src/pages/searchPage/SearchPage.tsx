@@ -21,12 +21,8 @@ export const SearchPage = () => {
   const totalPage = useJobStore((state) => state.totalCountPage);
 
   useEffect(() => {
-    try {
-      if (secretToken) {
-        fetchJobs(secretToken, currentPage, params);
-      }
-    } catch (error) {
-      console.error(error);
+    if (secretToken) {
+      fetchJobs(secretToken, currentPage, params);
     }
   }, [currentPage, params]);
   return (
