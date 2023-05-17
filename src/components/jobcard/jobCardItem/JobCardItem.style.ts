@@ -25,6 +25,9 @@ export const useStyles = createStyles((theme) => ({
     fontWeight: 600,
     fontSize: 20,
     color: theme.colors.blue500,
+    ":hover": {
+      color: theme.colors.blue400,
+    },
     lineHeight: 1,
   },
   information: {
