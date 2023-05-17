@@ -25,7 +25,7 @@ export const useStyles = createStyles((theme) => ({
     border: `1px solid ${theme.colors.grey300}`,
     borderRadius: 8,
     background: theme.colors.white,
-    "&:hover, &:active": {
+    ":hover, :active": {
       borderColor: theme.colors.blue500,
     },
   },
@@ -46,8 +46,12 @@ export const useStyles = createStyles((theme) => ({
     border: "none",
     padding: 0,
     color: theme.colors.grey500,
-    "&:hover": {
+    ":hover": {
+      color: theme.colors.blue400,
       background: "transparent !important",
+    },
+    ":active": {
+      color: theme.colors.blue500,
     },
   },
   rightSection: {
