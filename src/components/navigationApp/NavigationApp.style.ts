@@ -23,11 +23,25 @@ export const useStyles = createStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: 500,
     fontSize: 16,
+    ":hover": {
+      color: theme.colors.blue400,
+    },
   },
 
   linkActive: {
-    "&, &:hover": {
+    "&, :hover": {
       color: theme.colors.blue500,
     },
+  },
+  hiddenNavMenu: {
+    [theme.fn.largerThan("xs")]: {
+      display: "none",
+    },
+  },
+  hiddenNavLinks: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    gap: 20,
   },
 }));
