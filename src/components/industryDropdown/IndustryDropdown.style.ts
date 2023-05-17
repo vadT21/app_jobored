@@ -13,6 +13,7 @@ export const useStyles = createStyles((theme) => ({
     color: theme.colors.black,
     lineHeight: 1.1875,
     marginTop: -0.5,
+    userSelect: "none",
   },
   wrapper: {
     height: 42,

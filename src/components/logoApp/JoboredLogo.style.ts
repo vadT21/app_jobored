@@ -14,5 +14,6 @@ export const useStyles = createStyles((theme) => ({
     fontWeight: 600,
     fontSize: 24,
     letterSpacing: -0.33,
+    userSelect: "none",
   },
 }));

@@ -14,6 +14,7 @@ export const useStyles = createStyles((theme) => {
       fontSize: 20,
       color: theme.colors.black,
       marginTop: -4,
+      userSelect: "none",
     },
     clearButtonPos: {
       margin: 0,
