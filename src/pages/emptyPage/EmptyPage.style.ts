@@ -30,5 +30,9 @@ export const useStyles = createStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: 600,
     fontSize: 14,
+    ":hover": {
+      background: theme.colors.blue400,
+      color: theme.colors.white,
+    },
   },
 }));
