@@ -1,6 +1,15 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { FavoriteJobStoreStateI } from "../models";
+import { JobDataI } from "../models";
+
+interface FavoriteJobStoreStateI {
+  loading: boolean;
+  error: any;
+  currentPage: number;
+  changeCurrentPage: (page: number) => void;
+  favoriteJobs: JobDataI[];
+  toggleFavoriteJobs: (jobs: JobDataI) => void;
+}
 
 export const useFavoritesStore = create<FavoriteJobStoreStateI>()(
   devtools(

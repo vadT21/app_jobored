@@ -2,7 +2,37 @@ import { create } from "zustand";
 import JobRequestResponse from "../API/jobrequest";
 import DetailJobRequestResponse from "../API/detailjobrequest";
 import CatalogRequestResponse from "../API/catalogrequest";
-import { JobStoreStateI } from "../models";
+import { JobDataI, ParamsQueryI, IndustryI } from "../models";
+
+export interface JobStoreStateI {
+  loading: boolean;
+  error: any;
+  currentPage: number;
+  changeCurrentPage: (page: number) => void;
+  totalCountPage: number;
+  jobs: JobDataI[];
+  fetchJobs: (token: string, page: number, param: ParamsQueryI) => void;
+  fetchJobDetail: (token: string, id?: string) => Promise<JobDataI | undefined>;
+  catalogues: IndustryI[];
+  fetchCatalogues: (token: string) => void;
+  keywords?: string;
+  addKeywords: (value?: string) => void;
+  salaryFrom: number | "";
+  changeSalaryFrom: (value: number | "") => void;
+  salaryTo: number | "";
+  changeSalaryTo: (value: number | "") => void;
+  industry: ChoosenIndustryI | null;
+  addIndustry: (value?: ChoosenIndustryI) => void;
+  params: ParamsQueryI;
+  addParams: () => void;
+  removeParams: () => void;
+}
+//интерфейс отрасли хранящейся в store
+interface ChoosenIndustryI {
+  value?: string;
+  label?: string;
+  key?: number;
+}
 
 export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   currentPage: 1,
