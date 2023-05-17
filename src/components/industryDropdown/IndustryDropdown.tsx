@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { Select } from "@mantine/core";
 import { useJobStore } from "../../store";
 import { useStyles } from "./IndustryDropdown.style";
-import { IconArrowDown, IconArrowUp } from "../icons";
+import { IconChevronDown } from "@tabler/icons-react";
 
 const IndustryDropdown = () => {
-  const { classes } = useStyles();
-
   const catalogues = useJobStore((state) => state.catalogues);
 
   const industry = useJobStore((state) => state.industry);
@@ -15,6 +13,8 @@ const IndustryDropdown = () => {
   const [value, setValue] = useState<string | undefined>("");
 
   const [isOpen, setIsOpen] = useState(false);
+  const { classes } = useStyles({ isOpen });
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -47,7 +47,13 @@ const IndustryDropdown = () => {
       data={items}
       value={value}
       onChange={handleChange}
-      icon={isOpen ? <IconArrowUp /> : <IconArrowDown />}
+      icon={
+        <IconChevronDown
+          size="1.5rem"
+          stroke={1.5}
+          className={classes.iconArrow}
+        />
+      }
       onDropdownOpen={handleToggle}
       onDropdownClose={handleToggle}
       rightSection={null}
