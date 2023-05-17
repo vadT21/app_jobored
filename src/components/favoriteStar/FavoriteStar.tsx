@@ -1,4 +1,4 @@
-import { Group, ActionIcon } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { useState } from "react";
 import { useFavoritesStore } from "../../store";
 import { IconStar } from "../icons";
@@ -39,14 +39,12 @@ const FavoriteStar = ({
   };
 
   return (
-    <Group onClick={handleStarClick}>
-      <ActionIcon variant="transparent" radius="md" size={36}>
-        <IconStar
-          fill={isActive ? "#5E96FC" : "#FFFFFF"}
-          stroke={isActive ? "#5E96FC" : "#ACADB9"}
-        />
-      </ActionIcon>
-    </Group>
+    <ActionIcon onClick={handleStarClick} variant="transparent" size={36}>
+      <IconStar
+        fill={isActive ? "#5E96FC" : "#FFFFFF"}
+        stroke={isActive ? "#5E96FC" : "#ACADB9"}
+      />
+    </ActionIcon>
   );
 };
 
