@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Paper, Burger } from "@mantine/core";
+import {
+  Paper,
+  Burger,
+  Drawer,
+  Flex,
+  Divider,
+  rem,
+  Collapse,
+  Transition,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ROUTE_LINKS } from "../../constants";
 import { useStyles } from "./NavigationApp.style";
@@ -8,7 +17,7 @@ import { useStyles } from "./NavigationApp.style";
 const NavigationApp = () => {
   const links = [ROUTE_LINKS.searchPage, ROUTE_LINKS.favoritePage];
 
-  const [opened, { toggle }] = useDisclosure(false);
+  const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
@@ -20,7 +29,7 @@ const NavigationApp = () => {
         [classes.linkActive]: active === link.link,
       })}
       onClick={() => {
-        setActive(link.link);
+        toggle(), setActive(link.link);
       }}
     >
       {link.label}
@@ -38,6 +47,22 @@ const NavigationApp = () => {
         className={classes.burger}
         size="sm"
       />
+      <Drawer
+        opened={opened}
+        onClose={close}
+        size="100%"
+        padding="30px 40px 10px 40px"
+        title="Навигация по сайту"
+        className={classes.hiddenNavMenu}
+        zIndex={1000}
+      >
+        <Divider my={20} />
+        <Collapse in={opened}>
+          <Paper component="nav" className={classes.hiddenNavLinks}>
+            {items}
+          </Paper>
+        </Collapse>
+      </Drawer>
     </>
   );
 };
