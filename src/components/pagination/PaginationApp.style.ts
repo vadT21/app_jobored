@@ -9,6 +9,12 @@ export const useStyles = createStyles((theme) => {
       "&[data-active]": {
         backgroundColor: theme.colors.blue500,
         color: theme.colors.white,
+        ":hover": {
+          background: `${theme.colors.blue500} !important`,
+        },
+      },
+      ":hover": {
+        background: `${theme.colors.blue100} !important`,
       },
     },
   };
