@@ -1,6 +1,11 @@
 import axios from "axios";
 import { API_DATA } from "../constants/apiData";
-import { ParamsQueryI, JobRequestI } from "../models";
+import { ParamsQueryI, JobDataI } from "../models";
+
+export interface JobRequestI {
+  total: number;
+  objects: JobDataI[];
+}
 
 const JobRequestResponse = async (
   token: string,
