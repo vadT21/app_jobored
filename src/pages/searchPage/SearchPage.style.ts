@@ -31,5 +31,11 @@ export const useStyles = createStyles((theme) => {
       maxWidth: "100%",
       flex: 1,
     },
+    pagination: {
+      paddingTop: 32,
+      [theme.fn.smallerThan("sm")]: {
+        paddingBottom: 32,
+      },
+    },
   };
 });

@@ -6,7 +6,7 @@ export const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan("xs")]: {
       padding: 0,
-      gap: 0,
+      gap: 8,
       justifyContent: "space-around",
     },
   },

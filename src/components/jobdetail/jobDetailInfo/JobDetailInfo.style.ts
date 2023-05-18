@@ -7,7 +7,7 @@ export const useStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    padding: "26px 24px !important",
+    padding: "26px 48px 26px 24px !important",
     gap: 12.5,
     background: "#FFFFFF",
     border: `1px solid ${theme.colors.grey200}`,
@@ -25,12 +25,20 @@ export const useStyles = createStyles((theme) => ({
     color: theme.colors.black,
     lineHeight: 1,
   },
-  textPoint: {},
+  textPoint: {
+    [theme.fn.smallerThan("xs")]: {
+      display: "none",
+    },
+  },
   information: {
     padding: 0,
     gap: 12,
     lineHeight: 1,
     fontSize: 20,
+    [theme.fn.smallerThan("xs")]: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+    },
   },
   typeOfWork: {
     fontWeight: 400,
