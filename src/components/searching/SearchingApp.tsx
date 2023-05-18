@@ -4,7 +4,7 @@ import { useJobStore } from "../../store";
 import { useStyles } from "./SearchingApp.style";
 import { IconSearch } from "../icons";
 
-const SearchingAppX = () => {
+const SearchingAppMemo = () => {
   const keywords = useJobStore((state) => state.keywords);
   const addKeywords = useJobStore((state) => state.addKeywords);
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,5 +35,5 @@ const SearchingAppX = () => {
     </Paper>
   );
 };
-const SearchingApp = React.memo(SearchingAppX);
+const SearchingApp = React.memo(SearchingAppMemo);
 export default SearchingApp;

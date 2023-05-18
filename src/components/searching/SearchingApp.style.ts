@@ -35,6 +35,9 @@ export const useStyles = createStyles((theme) => ({
   },
   rightSection: {
     paddingRight: 33,
+    [theme.fn.smallerThan("xs")]: {
+      paddingRight: 20,
+    },
   },
   searchButton: {
     height: 32,
@@ -49,6 +52,14 @@ export const useStyles = createStyles((theme) => ({
     },
     "&: active": {
       background: theme.colors.blue600,
+    },
+    [theme.fn.smallerThan("xs")]: {
+      padding: "0 10px",
+    },
+  },
+  icon: {
+    [theme.fn.smallerThan("xs")]: {
+      display: "none",
     },
   },
 }));
