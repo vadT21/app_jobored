@@ -85,9 +85,6 @@ export const useStyles = createStyles(
       transition: "transform 150ms ease",
       transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
       color: isOpen ? theme.colors.blue500 : theme.colors.grey500,
-      ":hover": {
-        color: "red !important",
-      },
     },
   }),
 );
