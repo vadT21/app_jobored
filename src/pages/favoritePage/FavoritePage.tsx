@@ -28,12 +28,12 @@ export const FavoritePage = () => {
   }, [currentPage]);
 
   return (
-    <Container maw={773}>
+    <Container className={classes.container}>
       <Grid>
-        <Grid.Col mih={596}>
+        <Grid.Col className={classes.list}>
           <JobCardList jobs={visibleFavoriteJobsTest} />
         </Grid.Col>
-        <Grid.Col pt={96}>
+        <Grid.Col className={classes.pagination}>
           <PaginationApp
             currentPage={currentPage}
             changeCurrentPage={changeCurrentPage}

@@ -39,7 +39,7 @@ export const SearchPage = () => {
             <Grid.Col>
               <JobCardList jobs={jobs} />
             </Grid.Col>
-            <Grid.Col pt={32}>
+            <Grid.Col className={classes.pagination}>
               <PaginationApp
                 currentPage={currentPage}
                 changeCurrentPage={changeCurrentPage}
