@@ -1,15 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Paper,
-  Burger,
-  Drawer,
-  Flex,
-  Divider,
-  rem,
-  Collapse,
-  Transition,
-} from "@mantine/core";
+import { Paper, Burger, Drawer, Divider, Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ROUTE_LINKS } from "../../constants";
 import { useStyles } from "./NavigationApp.style";
