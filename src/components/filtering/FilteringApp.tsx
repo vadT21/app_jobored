@@ -1,5 +1,6 @@
 import React from "react";
-import { Group, Button, Paper, Burger } from "@mantine/core";
+import { Group, Button, Paper, ActionIcon, Text } from "@mantine/core";
+import { IconChevronDown } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import IndustryDropdown from "../industryDropdown/IndustryDropdown";
 import SalaryScale from "../salaryScale/SalaryScale";
@@ -7,9 +8,9 @@ import { useStyles } from "./FilteringApp.style";
 import HeaderFIltering from "./headerFiltering/HeaderFIltering";
 
 const FilteringAppC = () => {
-  const { classes } = useStyles();
   console.log("render filtre");
   const [opened, { toggle }] = useDisclosure(false);
+  const { classes } = useStyles({ opened });
   return (
     <>
       <Paper component="section" className={classes.container}>
@@ -22,12 +23,19 @@ const FilteringAppC = () => {
 
         <Button className={classes.control}>Применить</Button>
       </Paper>
-      <Burger
-        opened={opened}
+
+      <ActionIcon
+        className={classes.actionRoot}
+        variant="transparent"
         onClick={toggle}
-        className={classes.burger}
-        size="sm"
-      />
+      >
+        <Text>Фильтры</Text>
+        <IconChevronDown
+          className={classes.actionIcon}
+          size="1.33rem"
+          stroke={1.5}
+        />
+      </ActionIcon>
     </>
   );
 };
