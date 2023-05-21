@@ -1,6 +1,3 @@
-### result: https://vadt21.github.io/app_jobored/
-
-#
 ## Задание: 
 
 ## Написать приложение для поиска и управления вакансиями и в соответствии с дизайном.
@@ -14,3 +11,5 @@
  Разверни приложение (Используй Netlify, Github Pages, Render.com и др.), чтобы оно было доступно по ссылке.
  
 Полная версия задания доступна по ссылке: https://startup-summer-2023-dev-task.super.site/
+
+### result: https://vadt21.github.io/app_jobored/
