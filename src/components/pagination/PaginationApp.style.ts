@@ -16,6 +16,12 @@ export const useStyles = createStyles((theme) => {
       ":hover": {
         background: `${theme.colors.blue100} !important`,
       },
+      ":first-of-type": {
+        color: theme.colors.grey600,
+      },
+      ":last-of-type": {
+        color: theme.colors.grey600,
+      },
     },
   };
 });
