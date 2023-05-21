@@ -32,7 +32,7 @@ export const useStyles = createStyles(
       color: theme.colors.black,
       padding: "0 26px 0 11px !important",
       caretColor: theme.colors.blue500,
-
+      textOverflow: "ellipsis",
       border: `1px solid ${theme.colors.grey300}`,
       borderRadius: 8,
       background: theme.colors.white,
@@ -43,8 +43,9 @@ export const useStyles = createStyles(
     dropdown: {
       background: theme.colors.white,
       borderRadius: 8,
+
       ".mantine-ScrollArea-scrollbar": {
-        width: "8px",
+        width: "8px !important",
         background: "transparent",
       },
       ".mantine-ScrollArea-thumb": {
@@ -52,6 +53,7 @@ export const useStyles = createStyles(
       },
     },
     item: {
+      whiteSpace: "normal",
       ":hover": {
         background: theme.colors.blue100,
       },

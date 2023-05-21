@@ -1,32 +1,36 @@
 import { useState, useEffect } from "react";
 import { Select } from "@mantine/core";
+import { IconChevronDown } from "@tabler/icons-react";
 import { useJobStore } from "../../store";
 import { useStyles } from "./IndustryDropdown.style";
-import { IconChevronDown } from "@tabler/icons-react";
 
 const IndustryDropdown = () => {
   const catalogues = useJobStore((state) => state.catalogues);
 
   const industry = useJobStore((state) => state.industry);
-  const addCatalogue = useJobStore((state) => state.addIndustry);
+  const addIndustry = useJobStore((state) => state.addIndustry);
 
   const [value, setValue] = useState<string | undefined>("");
 
   const [isOpen, setIsOpen] = useState(false);
+
   const { classes } = useStyles({ isOpen });
 
-  const handleToggle = () => {
+  //закрытие открытие dropdown
+  const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
+  //массив отраслей для отображения (нужные поля оставлены)
   const items = catalogues.map((el) => ({
     value: el.title,
     label: el.title,
     key: el.key,
   }));
-  const handleChange = (value: string) => {
+  //смена отрасли
+  const handleChangeIndustry = (value: string) => {
     const res = items.find((el) => el.value === value);
-    addCatalogue(res);
+    addIndustry(res);
     setValue(value);
   };
 
@@ -36,9 +40,9 @@ const IndustryDropdown = () => {
       setValue(industry.value);
     }
   }, [industry]);
-
   return (
     <Select
+      data-elem="industry-select"
       classNames={classes}
       label="Отрасль"
       placeholder="Выберите отрасль"
@@ -46,7 +50,7 @@ const IndustryDropdown = () => {
       nothingFound="Нету отраслей"
       data={items}
       value={value}
-      onChange={handleChange}
+      onChange={handleChangeIndustry}
       icon={
         <IconChevronDown
           size="1.5rem"
@@ -54,8 +58,8 @@ const IndustryDropdown = () => {
           className={classes.iconArrow}
         />
       }
-      onDropdownOpen={handleToggle}
-      onDropdownClose={handleToggle}
+      onDropdownOpen={handleToggleDropdown}
+      onDropdownClose={handleToggleDropdown}
       rightSection={null}
       transitionProps={{ duration: 300, transition: "fade" }}
     />

@@ -13,18 +13,23 @@ const FavoriteStar = ({
   payment_to,
   payment_from,
   currency,
-  favorite,
 }: JobDataI) => {
-  const { classes } = useStyles();
-
-  const [isActive, setIsActive] = useState(favorite);
-
+  const { theme } = useStyles();
+  const favorites = useFavoritesStore((state) => state.favoriteJobs);
   const toggleFavoriteJobs = useFavoritesStore(
     (state) => state.toggleFavoriteJobs,
   );
 
-  const handleStarClick = () => {
-    console.log("work star");
+  //проверка есть ли вакансия в избранных
+  const checkStar = (id: number) => {
+    const res = favorites.some((job) => job.id === id);
+    return res;
+  };
+
+  const [isActive, setIsActive] = useState(checkStar(id));
+
+  const handleStarClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setIsActive(!isActive);
     toggleFavoriteJobs({
       id,
@@ -34,15 +39,19 @@ const FavoriteStar = ({
       payment_to,
       payment_from,
       currency,
-      favorite,
     });
   };
 
   return (
-    <ActionIcon onClick={handleStarClick} variant="transparent" size={36}>
+    <ActionIcon
+      data-elem={`vacancy-${id}-shortlist-button`}
+      onClick={handleStarClick}
+      variant="transparent"
+      size={36}
+    >
       <IconStar
-        fill={isActive ? "#5E96FC" : "#FFFFFF"}
-        stroke={isActive ? "#5E96FC" : "#ACADB9"}
+        fill={isActive ? theme.colors.blue500[0] : theme.colors.white[0]}
+        stroke={isActive ? theme.colors.blue500[0] : theme.colors.grey500[0]}
       />
     </ActionIcon>
   );

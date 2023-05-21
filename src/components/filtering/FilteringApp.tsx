@@ -6,11 +6,16 @@ import IndustryDropdown from "../industryDropdown/IndustryDropdown";
 import SalaryScale from "../salaryScale/SalaryScale";
 import { useStyles } from "./FilteringApp.style";
 import HeaderFIltering from "./headerFiltering/HeaderFIltering";
+import { useJobStore } from "../../store";
 
-const FilteringAppC = () => {
-  console.log("render filtre");
+const FilteringAppMemo = () => {
+  // для октрытия/закрытия при адаптиве
   const [opened, { toggle }] = useDisclosure(false);
   const { classes } = useStyles({ opened });
+  const addParams = useJobStore((state) => state.addParams);
+  const handleClickAddParams = () => {
+    addParams();
+  };
   return (
     <>
       <Paper component="section" className={classes.container}>
@@ -21,7 +26,13 @@ const FilteringAppC = () => {
           <SalaryScale />
         </Group>
 
-        <Button className={classes.control}>Применить</Button>
+        <Button
+          data-elem="search-button"
+          onClick={handleClickAddParams}
+          className={classes.control}
+        >
+          Применить
+        </Button>
       </Paper>
 
       <ActionIcon
@@ -40,5 +51,5 @@ const FilteringAppC = () => {
   );
 };
 
-const FilteringApp = React.memo(FilteringAppC);
+const FilteringApp = React.memo(FilteringAppMemo);
 export default FilteringApp;
