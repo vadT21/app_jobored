@@ -1,5 +1,3 @@
-### app_jobored
-
 ### result: https://vadt21.github.io/app_jobored/
 
 #
