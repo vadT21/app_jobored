@@ -11,4 +11,4 @@
  
 Полная версия задания доступна по ссылке: https://startup-summer-2023-dev-task.super.site/
 
-### result: https://vadt21.github.io/app_jobored/
+### result: https://vadt21.github.io/jobored/
