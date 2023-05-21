@@ -7,11 +7,15 @@ const ClearButton = () => {
   const { classes } = useStyles();
   const removeParams = useJobStore((state) => state.removeParams);
 
+  const handleClickRemove = () => {
+    removeParams();
+  };
+
   return (
     <Button
       classNames={classes}
       rightIcon={<IconX size={14} />}
-      onClick={removeParams}
+      onClick={handleClickRemove}
     >
       Сбросить все
     </Button>
