@@ -5,6 +5,7 @@ import { JobDataI, ParamsQueryI, IndustryI } from "../models";
 export interface JobStoreStateI {
   loading: boolean;
   error: any;
+  errorDetail: any;
   currentPage: number;
   changeCurrentPage: (page: number) => void;
   totalCountPage: number;
@@ -38,6 +39,7 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   totalCountPage: 125,
   loading: false,
   error: null,
+  errorDetail: null,
   jobs: [],
   fetchJobs: async (token, page, params) => {
     set({ loading: true });
@@ -62,7 +64,7 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
       if (!res) throw new Error("Failed to fetch! Try again.");
       return res;
     } catch (error: any) {
-      set({ error: error.message });
+      set({ errorDetail: error.message });
     } finally {
       set({ loading: false });
     }

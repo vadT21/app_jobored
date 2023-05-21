@@ -1,12 +1,13 @@
 import { SimpleGrid, Container } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { useJobStore, useTokenStore } from "../../store";
 import JobDetailInfo from "../../components/jobdetail/jobDetailInfo/JobDetailInfo";
 import JobDetailDescription from "../../components/jobdetail/jobDetailDescription/JobDetailDescription";
 //import { useStyles } from "./DetailPage.style";
 import LoaderApp from "../../components/loader/LoaderApp";
 import { JobDataI } from "../../models";
+import { ROUTE_LINKS } from "../../constants";
 
 export const DetailPage = () => {
   //const { classes } = useStyles(); если нужны будут стили
@@ -28,9 +29,16 @@ export const DetailPage = () => {
     }
   }
 
+  const errorDetail = useJobStore((state) => state.errorDetail);
+
   useEffect(() => {
     fetchJob();
   }, []);
+
+  // обработка ошибки
+  if (errorDetail) {
+    return <Navigate to={ROUTE_LINKS.emptyPage.link} replace />;
+  }
 
   return (
     <Container maw={773}>
