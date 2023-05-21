@@ -1,4 +1,4 @@
-//интерфейс data job
+//интерфейс вакансии
 export interface JobDataI {
   id: number;
   profession?: string;
@@ -7,7 +7,6 @@ export interface JobDataI {
   payment_to?: number;
   payment_from?: number;
   currency?: string;
-  favorite?: boolean;
   vacancyRichText?: string;
 }
 
