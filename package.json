@@ -1,9 +1,9 @@
 {
-  "name": "app_jobored",
+  "name": "jobored",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.1",
   "type": "module",
-  "homepage": "https://vadt21.github.io/app_jobored/",
+  "homepage": "https://vadt21.github.io/jobored/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
