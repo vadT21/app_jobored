@@ -21,6 +21,7 @@ const SalaryScale = () => {
     <>
       <Group className={classes.root}>
         <NumberInput
+          data-elem="salary-from-input"
           classNames={classes}
           label="Оклад"
           placeholder={"От"}
@@ -32,6 +33,7 @@ const SalaryScale = () => {
           onChange={handleChangeFromValue}
         />
         <NumberInput
+          data-elem="salary-to-input"
           classNames={classes}
           placeholder={"До"}
           stepHoldDelay={500}
