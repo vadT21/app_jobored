@@ -13,7 +13,6 @@ const JobDetailInfo = ({
   payment_to,
   payment_from,
   currency,
-  favorite,
 }: JobDataI) => {
   const { classes } = useStyles();
   const job = {
@@ -24,7 +23,6 @@ const JobDetailInfo = ({
     payment_to,
     payment_from,
     currency,
-    favorite,
   };
   return (
     <Card className={classes.card}>
