@@ -34,8 +34,10 @@ export const useStyles = createStyles((theme) => ({
     },
   },
   hiddenNavMenu: {
+    padding: "30px 40px 10px 40px",
     [theme.fn.largerThan("xs")]: {
       display: "none",
+      zIndex: -1,
     },
   },
   hiddenNavLinks: {
