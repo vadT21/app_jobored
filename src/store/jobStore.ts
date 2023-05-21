@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { JobRequest, DetailJobRequest, CatalogRequest } from "../API";
+import { JobRequest, DetailJobRequest, CatalogRequest } from "../api";
 import { JobDataI, ParamsQueryI, IndustryI } from "../models";
 
 export interface JobStoreStateI {

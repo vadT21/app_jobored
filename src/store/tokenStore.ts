@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { TokenRequest } from "../API";
+import { TokenRequest } from "../api";
 import { TOKEN_LIVE_TIME } from "../constants";
 
 interface TokenState {
