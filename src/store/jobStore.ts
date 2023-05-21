@@ -1,7 +1,5 @@
 import { create } from "zustand";
-import JobRequestResponse from "../API/jobrequest";
-import DetailJobRequestResponse from "../API/detailjobrequest";
-import CatalogRequestResponse from "../API/catalogrequest";
+import { JobRequest, DetailJobRequest, CatalogRequest } from "../API";
 import { JobDataI, ParamsQueryI, IndustryI } from "../models";
 
 export interface JobStoreStateI {
@@ -15,7 +13,7 @@ export interface JobStoreStateI {
   fetchJobDetail: (token: string, id?: string) => Promise<JobDataI | undefined>;
   catalogues: IndustryI[];
   fetchCatalogues: (token: string) => void;
-  keywords?: string;
+  keywords: string;
   addKeywords: (value?: string) => void;
   salaryFrom: number | "";
   changeSalaryFrom: (value: number | "") => void;
@@ -44,11 +42,11 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   fetchJobs: async (token, page, params) => {
     set({ loading: true });
     try {
-      const res = await JobRequestResponse(token, page, params);
+      const res = await JobRequest(token, page, params);
       if (!res) throw new Error("Failed to fetch! Try again.");
       set({
         jobs: res.objects,
-        totalCountPage: res.total / 4 > 125 ? 125 : res.total / 4,
+        totalCountPage: res.total / 4 > 125 ? 125 : Math.ceil(res.total / 4),
         error: null,
       });
     } catch (error: any) {
@@ -60,7 +58,7 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   fetchJobDetail: async (token, id) => {
     set({ loading: true });
     try {
-      const res = await DetailJobRequestResponse(token, id);
+      const res = await DetailJobRequest(token, id);
       if (!res) throw new Error("Failed to fetch! Try again.");
       return res;
     } catch (error: any) {
@@ -71,19 +69,16 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   },
   catalogues: [],
   fetchCatalogues: async (token) => {
-    set({ loading: true });
     try {
-      const res = await CatalogRequestResponse(token);
+      const res = await CatalogRequest(token);
       if (!res) throw new Error("Failed to fetch! Try again.");
       set({ catalogues: res, error: null });
     } catch (error: any) {
       set({ error: error.message });
-    } finally {
-      set({ loading: false });
     }
   },
 
-  keywords: undefined,
+  keywords: "",
   addKeywords: (value) => set({ keywords: value }),
 
   salaryFrom: "",
@@ -101,28 +96,53 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     payment_to: "",
     industry: null,
   },
-  addParams: () =>
-    set({
-      params: {
-        keywords: get().keywords,
-        payment_from: get().salaryFrom,
-        payment_to: get().salaryTo,
-        industry: get().industry?.key,
-      },
-      currentPage: 1,
-    }),
-  removeParams: () =>
-    set({
-      params: {
+  addParams: () => {
+    const isValuesEqual =
+      get().params.keywords === get().keywords &&
+      get().params.payment_from === get().salaryFrom &&
+      get().params.payment_to === get().salaryTo &&
+      get().params.industry == get().industry?.key;
+
+    if (!isValuesEqual) {
+      set({
+        params: {
+          keywords: get().keywords,
+          payment_from: get().salaryFrom,
+          payment_to: get().salaryTo,
+          industry: get().industry?.key,
+        },
+        currentPage: 1,
+      });
+    }
+  },
+  removeParams: () => {
+    const isValuesEmpty =
+      get().params.keywords === "" &&
+      get().params.payment_from === "" &&
+      get().params.payment_to === "" &&
+      get().params.industry === null;
+
+    if (isValuesEmpty) {
+      set({
         keywords: "",
-        payment_from: "",
-        payment_to: "",
+        salaryFrom: "",
+        salaryTo: "",
         industry: null,
-      },
-      currentPage: 1,
-      keywords: "",
-      salaryFrom: "",
-      salaryTo: "",
-      industry: null,
-    }),
+      });
+    } else {
+      set({
+        params: {
+          keywords: "",
+          payment_from: "",
+          payment_to: "",
+          industry: null,
+        },
+        currentPage: 1,
+        keywords: "",
+        salaryFrom: "",
+        salaryTo: "",
+        industry: null,
+      });
+    }
+  },
 }));

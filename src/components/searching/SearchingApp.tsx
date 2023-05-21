@@ -7,7 +7,7 @@ import { IconSearch } from "../icons";
 const SearchingAppMemo = () => {
   const keywords = useJobStore((state) => state.keywords);
   const addKeywords = useJobStore((state) => state.addKeywords);
-  const handleClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAddKeywords = (event: React.ChangeEvent<HTMLInputElement>) => {
     addKeywords(event.currentTarget.value);
   };
   const { classes } = useStyles();
@@ -16,18 +16,21 @@ const SearchingAppMemo = () => {
     addParams();
   };
 
-  console.log("render search");
-
   return (
     <Paper component="section">
       <TextInput
+        data-elem="search-input"
         classNames={classes}
         icon={<IconSearch />}
         placeholder="Введите название вакансии"
         value={keywords}
-        onChange={handleClick}
+        onChange={handleAddKeywords}
         rightSection={
-          <Button className={classes.searchButton} onClick={handleAddParams}>
+          <Button
+            data-elem="search-button"
+            className={classes.searchButton}
+            onClick={handleAddParams}
+          >
             Поиск
           </Button>
         }

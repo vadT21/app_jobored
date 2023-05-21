@@ -1,17 +1,15 @@
-import { Title, Flex, Button } from "@mantine/core";
+import { Flex, Button } from "@mantine/core";
 import { Link } from "react-router-dom";
-import { IconEmptyState } from "../../components/icons/index.ts";
 import { ROUTE_LINKS } from "../../constants";
 import { useStyles } from "./EmptyPage.style.ts";
+import EmptyState from "../../components/emptyState/EmptyState.tsx";
 
 export const EmptyPage = () => {
+  //стили
   const { classes } = useStyles();
   return (
     <Flex className={classes.root}>
-      <IconEmptyState />
-      <Title order={2} className={classes.title}>
-        Упс, здесь еще ничего нет!
-      </Title>
+      <EmptyState title="Упс, здесь еще ничего нет!" />
       <Link to={ROUTE_LINKS.searchPage.link}>
         <Button className={classes.button}>Поиск Вакансий</Button>
       </Link>
