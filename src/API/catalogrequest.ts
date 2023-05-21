@@ -2,10 +2,9 @@ import axios from "axios";
 import { API_DATA } from "../constants/apiData";
 import { IndustryI } from "../models";
 
-const CatalogRequestResponse = async (token: string): Promise<IndustryI[]> => {
+export const CatalogRequest = async (token: string): Promise<IndustryI[]> => {
   const headers = {
     ...API_DATA.headers,
-    "x-api-app-id": `${API_DATA.client_secret}`,
   };
   const url = `${API_DATA.base_url}/catalogues`;
   try {
@@ -23,5 +22,3 @@ const CatalogRequestResponse = async (token: string): Promise<IndustryI[]> => {
     throw error;
   }
 };
-
-export default CatalogRequestResponse;
