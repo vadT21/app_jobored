@@ -12,8 +12,6 @@ const PaginationApp = ({
   changeCurrentPage,
   totalPage,
 }: Props) => {
-  console.log("render pagiantion");
-
   const { classes } = useStyles();
   return (
     <Pagination
