@@ -20,7 +20,10 @@ const NavigationApp = () => {
         [classes.linkActive]: active === link.link,
       })}
       onClick={() => {
-        toggle(), setActive(link.link);
+        if (opened) {
+          toggle();
+        }
+        setActive(link.link);
       }}
     >
       {link.label}
@@ -42,10 +45,9 @@ const NavigationApp = () => {
         opened={opened}
         onClose={close}
         size="100%"
-        padding="30px 40px 10px 40px"
         title="Навигация по сайту"
         className={classes.hiddenNavMenu}
-        zIndex={1000}
+        zIndex={100}
       >
         <Divider my={20} />
         <Collapse in={opened}>
