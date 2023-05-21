@@ -29,13 +29,32 @@ export const useStyles = createStyles((theme) => {
     },
     searchAndList: {
       maxWidth: "100%",
+
       flex: 1,
+    },
+    jobList: {
+      minHeight: 612,
+      boxSizing: "border-box",
+      "@media (max-height: 600px)": {
+        minHeight: "unset",
+      },
+      [theme.fn.smallerThan("xs")]: {
+        minHeight: "unset",
+      },
     },
     pagination: {
       paddingTop: 32,
       [theme.fn.smallerThan("sm")]: {
         paddingBottom: 32,
       },
+    },
+    emptyStateContainer: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 12,
+      marginTop: 64,
     },
   };
 });

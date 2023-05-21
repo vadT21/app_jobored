@@ -9,16 +9,6 @@ export const useStyles = createStyles((theme) => ({
     flexDirection: "column",
   },
 
-  title: {
-    fontStyle: "normal",
-    fontWeight: 700,
-    fontSize: 24,
-    color: theme.colors.grey900,
-    // [theme.fn.smallerThan("sm")]: {
-    //   fontSize: rem(32),
-    // },
-  },
-
   button: {
     width: 164,
     height: 42,

@@ -5,7 +5,8 @@ export const useStyles = createStyles((theme) => ({
     maxWidth: 773,
   },
   list: {
-    minHeight: 596,
+    minHeight: 612,
+    boxSizing: "border-box",
     "@media (max-height: 600px)": {
       minHeight: "unset",
     },
