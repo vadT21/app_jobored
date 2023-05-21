@@ -1,4 +1,4 @@
 export * from "./tokenRequest";
-export * from "./jobRequest";
-export * from "./detailJobRequest";
 export * from "./catalogRequest";
+export * from "./jobRequest";
+export * from "./tokenRequest";
