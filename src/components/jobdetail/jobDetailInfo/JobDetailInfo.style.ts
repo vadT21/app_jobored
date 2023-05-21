@@ -24,6 +24,9 @@ export const useStyles = createStyles((theme) => ({
     fontSize: 28,
     color: theme.colors.black,
     lineHeight: 1,
+    [theme.fn.smallerThan("xs")]: {
+      fontSize: 20,
+    },
   },
   textPoint: {
     [theme.fn.smallerThan("xs")]: {
@@ -38,6 +41,7 @@ export const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan("xs")]: {
       flexDirection: "column",
       alignItems: "flex-start",
+      fontSize: 16,
     },
   },
   typeOfWork: {
