@@ -20,7 +20,7 @@ const SalaryInfo = ({
   if (payment_from && payment_to) {
     summaryRow = `з/п ${payment_from} - ${payment_to} ${currency}`;
   } else if (payment_to) {
-    summaryRow = `з/п ${payment_to} ${currency}`;
+    summaryRow = `з/п до ${payment_to} ${currency}`;
   } else if (payment_from) {
     summaryRow = `з/п от ${payment_from} ${currency}`;
   } else {
