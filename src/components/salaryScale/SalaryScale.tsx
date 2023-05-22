@@ -27,7 +27,7 @@ const SalaryScale = () => {
           placeholder={"От"}
           stepHoldDelay={500}
           stepHoldInterval={100}
-          step={1}
+          step={1000}
           min={0}
           value={salaryFrom}
           onChange={handleChangeFromValue}
@@ -37,7 +37,7 @@ const SalaryScale = () => {
           classNames={classes}
           placeholder={"До"}
           stepHoldDelay={500}
-          step={1}
+          step={1000}
           min={0}
           stepHoldInterval={(t) => Math.max(1000 / t ** 2, 25)}
           value={salaryTo}
