@@ -1,22 +1,22 @@
 export const ROUTE_LINKS = {
+  homePage: {
+    label: "Главная страница",
+    url: "/jobored",
+  },
   searchPage: {
     label: "Поиск Вакансий",
-    link: "/jobored",
+    url: "/jobored",
   },
   favoritePage: {
     label: "Избранное",
-    link: "/jobored/favorite",
+    url: "/jobored/favorite",
   },
   detailPage: {
     label: "Детали Вакансии",
-    link: "/jobored/job",
+    url: "/jobored/job",
   },
   emptyPage: {
     label: "Пустая Страница",
-    link: "*",
-  },
-  myPage: {
-    label: "Моя страница",
-    link: "/jobored/mypage",
+    url: "*",
   },
 };

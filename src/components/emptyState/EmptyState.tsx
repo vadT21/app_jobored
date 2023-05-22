@@ -15,7 +15,7 @@ const EmptyState = ({ title, isButtonNeeded }: EmptyStateI) => {
   // для перехода на страницу поиска вакансий
   const navigate = useNavigate();
   const handleClickLink = () => {
-    navigate(ROUTE_LINKS.searchPage.link);
+    navigate(ROUTE_LINKS.searchPage.url);
   };
 
   return (

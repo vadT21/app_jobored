@@ -37,7 +37,7 @@ export const DetailPage = () => {
 
   // обработка ошибки
   if (errorDetail) {
-    return <Navigate to={ROUTE_LINKS.emptyPage.link} replace />;
+    return <Navigate to={ROUTE_LINKS.emptyPage.url} replace />;
   }
 
   return (

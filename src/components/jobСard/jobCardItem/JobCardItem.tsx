@@ -27,7 +27,7 @@ const JobCardItem = ({
     currency,
   };
   //линк для перехода на детали
-  const link = `${ROUTE_LINKS.detailPage.link}/${id}`;
+  const link = `${ROUTE_LINKS.detailPage.url}/${id}`;
   const navigateToDetail = useNavigate();
   const handleClickGoToDetail = () => {
     navigateToDetail(link);

@@ -19,9 +19,9 @@ const NavigationApp = () => {
   const items = links.map((link) => (
     <Link
       key={link.label}
-      to={link.link}
+      to={link.url}
       className={cx(classes.link, {
-        [classes.linkActive]: pathnameTrim === link.link,
+        [classes.linkActive]: pathnameTrim === link.url,
       })}
       onClick={() => {
         if (opened) {

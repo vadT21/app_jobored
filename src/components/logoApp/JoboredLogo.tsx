@@ -6,10 +6,10 @@ import { ROUTE_LINKS } from "../../constants";
 
 const JoboredLogo = () => {
   // при клике переходить на главную + обновлять ее
-  const link = ROUTE_LINKS.searchPage.link;
-  const navigate = useNavigate();
+  const link = ROUTE_LINKS.searchPage.url;
+  const navigateToHomePage = useNavigate();
   const handleClickReloadPage = () => {
-    navigate(link);
+    navigateToHomePage(link);
     window.location.reload();
   };
   const { classes } = useStyles();
