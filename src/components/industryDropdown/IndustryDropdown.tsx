@@ -47,8 +47,7 @@ const IndustryDropdown = () => {
       label="Отрасль"
       placeholder="Выберите отрасль"
       searchable
-      dropdownPosition="bottom"
-      nothingFound="Нету отраслей"
+      nothingFound="Нет отраслей"
       data={items}
       value={value}
       onChange={handleChangeIndustry}
