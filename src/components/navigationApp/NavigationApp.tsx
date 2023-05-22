@@ -13,13 +13,15 @@ const NavigationApp = () => {
   //нужно для отображения навигации
   // если на определенном url чтобы верно отрисовка была
   const { pathname } = useLocation();
-
+  const pathnameTrim = pathname.endsWith("/")
+    ? pathname.slice(0, -1)
+    : pathname;
   const items = links.map((link) => (
     <Link
       key={link.label}
       to={link.link}
       className={cx(classes.link, {
-        [classes.linkActive]: pathname === link.link,
+        [classes.linkActive]: pathnameTrim === link.link,
       })}
       onClick={() => {
         if (opened) {
