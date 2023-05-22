@@ -28,6 +28,9 @@ export const useStyles = createStyles((theme) => ({
     ":hover, :active": {
       borderColor: theme.colors.blue500,
     },
+    [theme.fn.smallerThan("sm")]: {
+      justifyContent: "start",
+    },
   },
   input: {
     cursor: "default",
@@ -41,6 +44,10 @@ export const useStyles = createStyles((theme) => ({
     "::placeholder": {
       letterSpacing: 0.5,
     },
+    [theme.fn.smallerThan("sm")]: {
+      width: 246,
+      paddingRight: 0,
+    },
   },
   control: {
     border: "none",
@@ -53,9 +60,20 @@ export const useStyles = createStyles((theme) => ({
     ":active": {
       color: theme.colors.blue500,
     },
+    "& > svg": {
+      [theme.fn.smallerThan("sm")]: {
+        width: 20,
+        height: 20,
+      },
+    },
   },
   rightSection: {
     padding: "6.5px 0px",
     marginRight: 2,
+    [theme.fn.smallerThan("sm")]: {
+      padding: 0,
+      flexDirection: "row",
+      width: "auto",
+    },
   },
 }));
