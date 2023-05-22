@@ -55,6 +55,9 @@ export const useStyles = createStyles((theme) => {
       alignItems: "center",
       gap: 12,
       marginTop: 64,
+      [theme.fn.smallerThan("sm")]: {
+        marginTop: 18,
+      },
     },
   };
 });

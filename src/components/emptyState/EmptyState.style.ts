@@ -7,6 +7,9 @@ export const useStyles = createStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    [theme.fn.smallerThan("sm")]: {
+      paddingTop: 12,
+    },
   },
 
   button: {
