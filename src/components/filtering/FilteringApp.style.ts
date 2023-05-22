@@ -20,7 +20,7 @@ export const useStyles = createStyles(
         },
       },
 
-      params: {
+      paramsFilter: {
         paddingTop: 8,
         [theme.fn.smallerThan("sm")]: {
           flexDirection: "row",

@@ -14,8 +14,8 @@ export interface JobStoreStateI {
   fetchJobDetail: (token: string, id?: string) => Promise<JobDataI | undefined>;
   catalogues: IndustryI[];
   fetchCatalogues: (token: string) => void;
-  keywords: string;
-  addKeywords: (value?: string) => void;
+  keyword: string;
+  addKeyword: (value?: string) => void;
   salaryFrom: number | "";
   changeSalaryFrom: (value: number | "") => void;
   salaryTo: number | "";
@@ -80,8 +80,8 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     }
   },
 
-  keywords: "",
-  addKeywords: (value) => set({ keywords: value }),
+  keyword: "",
+  addKeyword: (value) => set({ keyword: value }),
 
   salaryFrom: "",
   changeSalaryFrom: (value) => set({ salaryFrom: value }),
@@ -93,25 +93,25 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   addIndustry: (value) => set({ industry: value }),
 
   params: {
-    keywords: "",
+    keyword: "",
     payment_from: "",
     payment_to: "",
-    industry: null,
+    catalogues: null,
   },
   addParams: () => {
     const isValuesEqual =
-      get().params.keywords === get().keywords &&
+      get().params.keyword === get().keyword &&
       get().params.payment_from === get().salaryFrom &&
       get().params.payment_to === get().salaryTo &&
-      get().params.industry == get().industry?.key;
+      get().params.catalogues == get().industry?.key;
 
     if (!isValuesEqual) {
       set({
         params: {
-          keywords: get().keywords,
+          keyword: get().keyword,
           payment_from: get().salaryFrom,
           payment_to: get().salaryTo,
-          industry: get().industry?.key,
+          catalogues: get().industry?.key,
         },
         currentPage: 1,
       });
@@ -119,14 +119,14 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   },
   removeParams: () => {
     const isValuesEmpty =
-      get().params.keywords === "" &&
+      get().params.keyword === "" &&
       get().params.payment_from === "" &&
       get().params.payment_to === "" &&
-      get().params.industry === null;
+      get().params.catalogues === null;
 
     if (isValuesEmpty) {
       set({
-        keywords: "",
+        keyword: "",
         salaryFrom: "",
         salaryTo: "",
         industry: null,
@@ -134,13 +134,13 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     } else {
       set({
         params: {
-          keywords: "",
+          keyword: "",
           payment_from: "",
           payment_to: "",
-          industry: null,
+          catalogues: null,
         },
         currentPage: 1,
-        keywords: "",
+        keyword: "",
         salaryFrom: "",
         salaryTo: "",
         industry: null,

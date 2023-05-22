@@ -5,10 +5,10 @@ import { useStyles } from "./SearchingApp.style";
 import { IconSearch } from "../icons";
 
 const SearchingAppMemo = () => {
-  const keywords = useJobStore((state) => state.keywords);
-  const addKeywords = useJobStore((state) => state.addKeywords);
-  const handleAddKeywords = (event: React.ChangeEvent<HTMLInputElement>) => {
-    addKeywords(event.currentTarget.value);
+  const keyword = useJobStore((state) => state.keyword);
+  const addKeyword = useJobStore((state) => state.addKeyword);
+  const handleAddKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    addKeyword(event.currentTarget.value);
   };
   const { classes } = useStyles();
   const addParams = useJobStore((state) => state.addParams);
@@ -23,8 +23,8 @@ const SearchingAppMemo = () => {
         classNames={classes}
         icon={<IconSearch />}
         placeholder="Введите название вакансии"
-        value={keywords}
-        onChange={handleAddKeywords}
+        value={keyword}
+        onChange={handleAddKeyword}
         rightSection={
           <Button
             data-elem="search-button"

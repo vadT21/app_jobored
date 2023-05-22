@@ -21,7 +21,7 @@ const FilteringAppMemo = () => {
       <Paper component="section" className={classes.container}>
         <HeaderFIltering />
 
-        <Group className={classes.params}>
+        <Group className={classes.paramsFilter}>
           <IndustryDropdown />
           <SalaryScale />
         </Group>

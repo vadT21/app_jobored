@@ -21,8 +21,8 @@ export interface IndustryI {
 
 //интерфейс параметров запроса для поиска/фильтрации
 export interface ParamsQueryI {
-  keywords?: string;
+  keyword?: string;
   payment_from: number | "";
   payment_to: number | "";
-  industry?: number | null;
+  catalogues?: number | null;
 }
