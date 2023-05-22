@@ -1,5 +1,5 @@
 import { Card, Text, Group, Title, Container } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FavoriteStar from "../../favoriteStar/FavoriteStar";
 import { IconLocation } from "../../icons";
 import { useStyles } from "./JobCardItem.style";
@@ -28,31 +28,36 @@ const JobCardItem = ({
   };
   //линк для перехода на детали
   const link = `${ROUTE_LINKS.detailPage.link}/${id}`;
-
+  const navigateToDetail = useNavigate();
+  const handleClickGoToDetail = () => {
+    navigateToDetail(link);
+  };
   return (
-    <Link to={link} className={classes.link}>
-      <Card className={classes.card} data-elem={`vacancy-${id}`}>
-        <Title order={3} className={classes.title}>
-          {profession}
-        </Title>
-        <Group className={classes.information}>
-          <SalaryInfo
-            payment_from={payment_from}
-            payment_to={payment_to}
-            currency={currency}
-          />
-          <Text className={classes.textPoint}>•</Text>
-          <Text className={classes.typeOfWork}>{type_of_work.title}</Text>
-        </Group>
-        <Group className={classes.location}>
-          <IconLocation />
-          <Text>{town.title}</Text>
-        </Group>
-        <Container className={classes.starPosition}>
-          <FavoriteStar {...job} />
-        </Container>
-      </Card>
-    </Link>
+    <Card
+      className={classes.card}
+      data-elem={`vacancy-${id}`}
+      onClick={handleClickGoToDetail}
+    >
+      <Title order={3} className={classes.title}>
+        {profession}
+      </Title>
+      <Group className={classes.information}>
+        <SalaryInfo
+          payment_from={payment_from}
+          payment_to={payment_to}
+          currency={currency}
+        />
+        <Text className={classes.textPoint}>•</Text>
+        <Text className={classes.typeOfWork}>{type_of_work.title}</Text>
+      </Group>
+      <Group className={classes.location}>
+        <IconLocation />
+        <Text>{town.title}</Text>
+      </Group>
+      <Container className={classes.starPosition}>
+        <FavoriteStar {...job} />
+      </Container>
+    </Card>
   );
 };
 

@@ -29,7 +29,7 @@ const FavoriteStar = ({
   const [isActive, setIsActive] = useState(checkStar(id));
 
   const handleStarClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+    event.stopPropagation();
     setIsActive(!isActive);
     toggleFavoriteJobs({
       id,

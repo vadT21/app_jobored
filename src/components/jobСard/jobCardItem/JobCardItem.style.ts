@@ -1,12 +1,8 @@
 import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
-  link: {
-    display: "block",
-    textDecoration: "none",
-    color: theme.colors.black,
-  },
   card: {
+    cursor: "pointer",
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
