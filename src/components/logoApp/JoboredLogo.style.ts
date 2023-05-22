@@ -2,6 +2,7 @@ import { createStyles } from "@mantine/core";
 
 export const useStyles = createStyles((theme) => ({
   wrapper: {
+    cursor: "pointer",
     background: theme.colors.white,
     display: "flex",
     alignItems: "center",
