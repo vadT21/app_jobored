@@ -1,28 +1,5 @@
-import { createStyles } from "@mantine/core";
+// import { createStyles } from "@mantine/core";
 
-export const useStyles = createStyles((theme) => ({
-  root: {
-    paddingTop: 78,
-    gap: 32,
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
+// export const useStyles = createStyles((theme) => ({
 
-  button: {
-    width: 164,
-    height: 42,
-    background: theme.colors.blue100,
-    borderRadius: 8,
-
-    color: theme.colors.blue600,
-    fontFamily: "Open Sans",
-    fontStyle: "normal",
-    fontWeight: 600,
-    fontSize: 14,
-    ":hover": {
-      background: theme.colors.blue400,
-      color: theme.colors.white,
-    },
-  },
-}));
+// }));
