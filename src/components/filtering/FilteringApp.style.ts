@@ -45,6 +45,7 @@ export const useStyles = createStyles(
       actionRoot: {
         display: "flex",
         width: "100%",
+        color: theme.colors.grey500,
         justifyContent: "flex-start",
         [theme.fn.largerThan("sm")]: {
           display: "none",
