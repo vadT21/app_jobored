@@ -70,7 +70,10 @@ export const SearchPage = () => {
                   </>
                 ) : (
                   <Container className={classes.emptyStateContainer}>
-                    <EmptyState title="Упс, ничего не найдено!" />
+                    <EmptyState
+                      title="Упс, ничего не найдено!"
+                      isButtonNeeded={false}
+                    />
                   </Container>
                 )}
               </>
