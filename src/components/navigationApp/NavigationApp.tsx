@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Paper, Burger, Drawer, Divider, Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { ROUTE_LINKS } from "../../constants";
@@ -9,21 +8,23 @@ const NavigationApp = () => {
   const links = [ROUTE_LINKS.searchPage, ROUTE_LINKS.favoritePage];
 
   const [opened, { toggle, close }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+
+  //нужно для отображения навигации
+  // если на определенном url чтобы верно отрисовка была
+  const { pathname } = useLocation();
 
   const items = links.map((link) => (
     <Link
       key={link.label}
       to={link.link}
       className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
+        [classes.linkActive]: pathname === link.link,
       })}
       onClick={() => {
         if (opened) {
           toggle();
         }
-        setActive(link.link);
       }}
     >
       {link.label}
