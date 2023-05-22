@@ -61,6 +61,14 @@ export const useStyles = createStyles(
         transition: "transform 150ms ease",
         transform: opened ? "rotate(180deg)" : "rotate(0deg)",
       },
+      adaptiveClear: {
+        alignItems: "center",
+        padding: 0,
+        display: opened ? "none" : "flex",
+        [theme.fn.largerThan("sm")]: {
+          display: "none",
+        },
+      },
     };
   },
 );
