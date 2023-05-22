@@ -47,6 +47,7 @@ const IndustryDropdown = () => {
       label="Отрасль"
       placeholder="Выберите отрасль"
       searchable
+      dropdownPosition="bottom"
       nothingFound="Нет отраслей"
       data={items}
       value={value}
