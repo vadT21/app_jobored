@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Grid, Container } from "@mantine/core";
 import JobCardList from "../../components/jobСard/jobCardList/JobCardList";
 import PaginationApp from "../../components/pagination/PaginationApp";
 import { useFavoritesStore } from "../../store";
-import { JobDataI } from "../../models";
 import { useStyles } from "./FavoritePage.style";
-import { Navigate } from "react-router-dom";
-import { ROUTE_LINKS } from "../../constants";
+import EmptyState from "../../components/emptyState/EmptyState";
 
 export const FavoritePage = () => {
   //стили
   const { classes } = useStyles();
 
-  //отображаемые избранные вакансии
-  const [visibleFavoriteJobsTest, setVisibleFavoriteJobsTest] = useState<
-    JobDataI[]
-  >([]);
   //массив избранных в store
   const favoriteJobs = useFavoritesStore((state) => state.favoriteJobs);
 
@@ -26,30 +20,33 @@ export const FavoritePage = () => {
   );
   const totalPage = Math.ceil(favoriteJobs.length / 4);
 
-  // слайсим избранный массив для отображения 4 вакансий
-  const visibleFavoriteJobs = (page: number) =>
-    favoriteJobs.slice(4 * (page - 1), 4 * (page - 1) + 4);
-
-  // изменяем отображаемый массив при изм. страницы
+  // нужно для проверки если удаляем на последней странице элементы
+  // чтобы вернуло на пред. страницу
   useEffect(() => {
-    setVisibleFavoriteJobsTest(visibleFavoriteJobs(currentPage));
-  }, [currentPage]);
+    if (currentPage - 1 === totalPage) {
+      changeCurrentPage(currentPage - 1);
+    }
+  }, [totalPage]);
 
   // опционально, если покидаем сбрасываем на первую стр.
   useEffect(() => {
     return changeCurrentPage(1);
   }, []);
 
-  // переход на empty page если нету избранных
+  // отображаем empty если нету избранных
   if (!favoriteJobs.length) {
-    return <Navigate to={ROUTE_LINKS.emptyPage.link} replace />;
+    return <EmptyState title="Упс, здесь еще ничего нет!" isButtonNeeded />;
   }
-
+  // Отображаемые элементы:
+  const items = favoriteJobs.slice(
+    4 * (currentPage - 1),
+    4 * (currentPage - 1) + 4,
+  );
   return (
     <Container className={classes.container}>
       <Grid>
         <Grid.Col className={classes.list}>
-          <JobCardList jobs={visibleFavoriteJobsTest} />
+          <JobCardList jobs={items} />
         </Grid.Col>
         <Grid.Col className={classes.pagination}>
           <PaginationApp
