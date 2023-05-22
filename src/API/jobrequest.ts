@@ -26,12 +26,6 @@ export const JobRequest = async (
   //цикл для добавления не пустых "ключей:значений" к запросу
   for (const key in params) {
     if ((params as any)[key]) {
-      //проверка для того чтобы ключ industry в конечном запросе
-      //заменить на catalogues
-      if (key == "industry") {
-        queryParams["catalogues"] = (params as any)[key];
-        continue;
-      }
       queryParams[key] = (params as any)[key];
     }
   }
