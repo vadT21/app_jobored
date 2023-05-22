@@ -24,9 +24,7 @@ export const useTokenStore = create<TokenState>()(
           if (checkToken > TOKEN_LIVE_TIME || get().loading) {
             try {
               set({ loading: true });
-
               const res = await TokenRequest();
-              console.log(res);
               if (!res) throw new Error("Failed to fetch! Try again.");
               set({
                 secretToken: res,
