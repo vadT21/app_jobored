@@ -25,7 +25,6 @@ export const useStyles = createStyles(
       gap: 10,
     },
     input: {
-      cursor: "default",
       height: "100%",
       fontWeight: 400,
       fontSize: 14,
