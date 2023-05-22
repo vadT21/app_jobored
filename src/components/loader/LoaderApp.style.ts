@@ -6,7 +6,7 @@ export const useStyles = createStyles(() => {
       display: "flex",
       minHeight: "50vh",
       margin: "0 auto",
-      width: 48,
+      width: 64,
       background: "transparent",
     },
   };

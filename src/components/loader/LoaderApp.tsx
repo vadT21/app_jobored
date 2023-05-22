@@ -6,7 +6,7 @@ const LoaderApp = () => {
   return (
     <Loader
       className={classes.loader}
-      variant="bars"
+      variant="dots"
       color={theme.colors.blue500[0]}
     />
   );
