@@ -17,6 +17,6 @@ export const ROUTE_LINKS = {
   },
   emptyPage: {
     label: "Пустая Страница",
-    url: "*",
+    url: "/jobored/empty",
   },
 };
