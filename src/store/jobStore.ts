@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { JobRequest, DetailJobRequest, CatalogRequest } from "../api";
 import { JobDataI, ParamsQueryI, IndustryI } from "../models";
+import { useTokenStore } from ".";
 
 export interface JobStoreStateI {
   loading: boolean;
@@ -10,10 +11,10 @@ export interface JobStoreStateI {
   changeCurrentPage: (page: number) => void;
   totalCountPage: number;
   jobs: JobDataI[];
-  fetchJobs: (token: string, page: number, param: ParamsQueryI) => void;
-  fetchJobDetail: (token: string, id?: string) => Promise<JobDataI | undefined>;
+  fetchJobs: (page: number, param: ParamsQueryI) => void;
+  fetchJobDetail: (id: string) => void;
   catalogues: IndustryI[];
-  fetchCatalogues: (token: string) => void;
+  fetchCatalogues: () => void;
   keyword: string;
   addKeyword: (value?: string) => void;
   salaryFrom: number | "";
@@ -33,6 +34,8 @@ interface ChoosenIndustryI {
   key?: number;
 }
 
+const secretToken = useTokenStore.getState().secretToken;
+
 export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   currentPage: 1,
   changeCurrentPage: (page) => set({ currentPage: page }),
@@ -41,10 +44,10 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   error: null,
   errorDetail: null,
   jobs: [],
-  fetchJobs: async (token, page, params) => {
+  fetchJobs: async (page, params) => {
     set({ loading: true });
     try {
-      const res = await JobRequest(token, page, params);
+      const res = await JobRequest(secretToken, page, params);
       if (!res) throw new Error("Failed to fetch! Try again.");
       set({
         jobs: res.objects,
@@ -57,12 +60,14 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
       set({ loading: false });
     }
   },
-  fetchJobDetail: async (token, id) => {
+  fetchJobDetail: async (id) => {
     set({ loading: true });
     try {
-      const res = await DetailJobRequest(token, id);
+      const res = await DetailJobRequest(secretToken, id);
       if (!res) throw new Error("Failed to fetch! Try again.");
-      return res;
+      set({
+        jobs: res,
+      });
     } catch (error: any) {
       set({ errorDetail: error.message });
     } finally {
@@ -70,9 +75,9 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     }
   },
   catalogues: [],
-  fetchCatalogues: async (token) => {
+  fetchCatalogues: async () => {
     try {
-      const res = await CatalogRequest(token);
+      const res = await CatalogRequest(secretToken);
       if (!res) throw new Error("Failed to fetch! Try again.");
       set({ catalogues: res, error: null });
     } catch (error: any) {
