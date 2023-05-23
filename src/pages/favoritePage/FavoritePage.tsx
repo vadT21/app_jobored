@@ -30,7 +30,7 @@ export const FavoritePage = () => {
 
   // опционально, если покидаем сбрасываем на первую стр.
   useEffect(() => {
-    return changeCurrentPage(1);
+    return () => changeCurrentPage(1);
   }, []);
 
   // отображаем empty если нету избранных
