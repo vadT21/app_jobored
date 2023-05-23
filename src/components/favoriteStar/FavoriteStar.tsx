@@ -3,26 +3,17 @@ import { useState } from "react";
 import { useFavoritesStore } from "../../store";
 import { IconStar } from "../icons";
 import { useStyles } from "./FavoriteStar.style";
-import { JobDataI } from "../../models";
 
-const FavoriteStar = ({
-  id,
-  type_of_work,
-  profession,
-  town,
-  payment_to,
-  payment_from,
-  currency,
-}: JobDataI) => {
+const FavoriteStar = ({ id }: { id: number }) => {
   const { theme } = useStyles();
-  const favorites = useFavoritesStore((state) => state.favoriteJobs);
+  const favorites = useFavoritesStore((state) => state.favoriteJobsID);
   const toggleFavoriteJobs = useFavoritesStore(
     (state) => state.toggleFavoriteJobs,
   );
 
   //проверка есть ли вакансия в избранных
   const checkStar = (id: number) => {
-    const res = favorites.some((job) => job.id === id);
+    const res = favorites.some((job) => job === id);
     return res;
   };
 
@@ -31,15 +22,7 @@ const FavoriteStar = ({
   const handleStarClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setIsActive(!isActive);
-    toggleFavoriteJobs({
-      id,
-      type_of_work: { title: type_of_work.title },
-      profession,
-      town: { title: town.title },
-      payment_to,
-      payment_from,
-      currency,
-    });
+    toggleFavoriteJobs(id);
   };
 
   return (

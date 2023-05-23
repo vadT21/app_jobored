@@ -15,15 +15,6 @@ const JobDetailInfo = ({
   currency,
 }: JobDataI) => {
   const { classes } = useStyles();
-  const job = {
-    id,
-    type_of_work: { title: type_of_work.title },
-    profession,
-    town: { title: town.title },
-    payment_to,
-    payment_from,
-    currency,
-  };
   return (
     <Card className={classes.card}>
       <Title order={3} className={classes.title}>
@@ -44,7 +35,7 @@ const JobDetailInfo = ({
         <Text>{town.title}</Text>
       </Group>
       <Container className={classes.starPosition}>
-        <FavoriteStar {...job} />
+        <FavoriteStar id={id} />
       </Container>
     </Card>
   );

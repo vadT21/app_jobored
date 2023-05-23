@@ -17,15 +17,6 @@ const JobCardItem = ({
   currency,
 }: JobDataI) => {
   const { classes } = useStyles();
-  const job = {
-    id,
-    type_of_work: { title: type_of_work.title },
-    profession,
-    town: { title: town.title },
-    payment_to,
-    payment_from,
-    currency,
-  };
   //линк для перехода на детали
   const link = `${ROUTE_LINKS.detailPage.url}/${id}`;
   const navigateToDetail = useNavigate();
@@ -55,7 +46,7 @@ const JobCardItem = ({
         <Text>{town.title}</Text>
       </Group>
       <Container className={classes.starPosition}>
-        <FavoriteStar {...job} />
+        <FavoriteStar id={id} />
       </Container>
     </Card>
   );
