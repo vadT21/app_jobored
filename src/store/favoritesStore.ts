@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { JobDataI } from "../models";
 
 interface FavoriteJobStoreStateI {
   currentPage: number;
   changeCurrentPage: (page: number) => void;
-  favoriteJobs: JobDataI[];
-  toggleFavoriteJobs: (job: JobDataI) => void;
+  favoriteJobsID: number[];
+  toggleFavoriteJobs: (jobID: number) => void;
 }
 
 export const useFavoritesStore = create<FavoriteJobStoreStateI>()(
@@ -15,17 +14,19 @@ export const useFavoritesStore = create<FavoriteJobStoreStateI>()(
       (set) => ({
         currentPage: 1,
         changeCurrentPage: (page) => set({ currentPage: page }),
-        favoriteJobs: [],
-        toggleFavoriteJobs: (job) =>
+        favoriteJobsID: [],
+        toggleFavoriteJobs: (jobID) =>
           set((state) => {
-            const index = state.favoriteJobs.findIndex(
-              (el) => el.id === job.id,
-            );
+            const index = state.favoriteJobsID.findIndex((el) => el === jobID);
             if (index === -1) {
-              return { favoriteJobs: [...state.favoriteJobs, job] };
+              return {
+                favoriteJobsID: [...state.favoriteJobsID, jobID],
+              };
             } else {
-              state.favoriteJobs.splice(index, 1);
-              return { favoriteJobs: [...state.favoriteJobs] };
+              state.favoriteJobsID.splice(index, 1);
+              return {
+                favoriteJobsID: [...state.favoriteJobsID],
+              };
             }
           }),
       }),
