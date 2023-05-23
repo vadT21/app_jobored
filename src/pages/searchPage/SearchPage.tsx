@@ -4,7 +4,7 @@ import FilteringApp from "../../components/filtering/FilteringApp";
 import SearchingApp from "../../components/searching/SearchingApp";
 import JobCardList from "../../components/jobСard/jobCardList/JobCardList";
 import PaginationApp from "../../components/pagination/PaginationApp";
-import { useJobStore, useTokenStore } from "../../store";
+import { useJobStore } from "../../store";
 import { useStyles } from "./SearchPage.style";
 import LoaderApp from "../../components/loader/LoaderApp";
 import EmptyState from "../../components/emptyState/EmptyState";
@@ -16,7 +16,6 @@ export const SearchPage = () => {
   //данные из стора для вакансий
   const jobs = useJobStore((state) => state.jobs);
   const fetchJobs = useJobStore((state) => state.fetchJobs);
-  const secretToken = useTokenStore((state) => state.secretToken);
   const params = useJobStore((state) => state.params);
 
   //пагинация из стора
@@ -24,21 +23,13 @@ export const SearchPage = () => {
   const changeCurrentPage = useJobStore((state) => state.changeCurrentPage);
   const totalPage = useJobStore((state) => state.totalCountPage);
 
-  //получение отраслей
-  const fetchCatalogues = useJobStore((state) => state.fetchCatalogues);
-
-  //загрузка для отоброжения лодера при переходе между page
+  //загрузка для отображения лодера при переходе между page
   const loadingJob = useJobStore((state) => state.loading);
 
   // для работ
   useEffect(() => {
-    fetchJobs(secretToken, currentPage, params);
+    fetchJobs(currentPage, params);
   }, [currentPage, params]);
-
-  // для отраслей
-  useEffect(() => {
-    fetchCatalogues(secretToken);
-  }, []);
 
   return (
     <Container className={classes.container}>
