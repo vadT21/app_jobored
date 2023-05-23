@@ -17,6 +17,7 @@ export const router = createBrowserRouter(
         path={`${ROUTE_LINKS.detailPage.url}/:id`}
         element={<DetailPage />}
       />
+      <Route path={ROUTE_LINKS.emptyPage.url} element={<EmptyPage />} />
       <Route path="*" element={<EmptyPage />} />
     </Route>,
   ),
