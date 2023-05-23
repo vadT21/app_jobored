@@ -10,7 +10,7 @@ interface JobRequestI {
 export const JobRequest = async (
   token: string,
   page: number,
-  params: ParamsQueryI,
+  params: ParamsQueryI | number[],
 ): Promise<JobRequestI> => {
   const headers = {
     ...API_DATA.headers,
@@ -19,21 +19,25 @@ export const JobRequest = async (
 
   const queryParams: any = {
     published: 1,
-    count: 4,
-    page: page - 1,
   };
 
-  //цикл для добавления не пустых "ключей:значений" к запросу
-  for (const key in params) {
-    if ((params as any)[key]) {
-      queryParams[key] = (params as any)[key];
+  if (!Array.isArray(params)) {
+    queryParams.count = 4;
+    queryParams.page = page - 1;
+    //цикл для добавления не пустых "ключей:значений" к запросу
+    for (const key in params) {
+      if ((params as any)[key]) {
+        queryParams[key] = (params as any)[key];
+      }
     }
-  }
-  // проверка на оклад «по договоренности», т.е. если зарпалата не указана,
-  //то добавлять доп. параметр no_agreement , по моей логике если зарплата
-  // идет "от" больше чем 0, то такие зарплаты мы не отображаем
-  if (params.payment_from) {
-    queryParams["no_agreement"] = 1;
+    // проверка на оклад «по договоренности», т.е. если зарпалата не указана,
+    //то добавлять доп. параметр no_agreement , по моей логике если зарплата
+    // идет "от" больше чем 0, то такие зарплаты мы не отображаем
+    if (params.payment_from) {
+      queryParams["no_agreement"] = 1;
+    }
+  } else {
+    queryParams["ids[]"] = params;
   }
 
   try {

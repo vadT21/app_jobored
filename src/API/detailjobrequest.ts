@@ -4,8 +4,8 @@ import { JobDataI } from "../models";
 
 export const DetailJobRequest = async (
   token: string,
-  id: string | undefined,
-): Promise<JobDataI> => {
+  id: string,
+): Promise<JobDataI[]> => {
   const headers = {
     ...API_DATA.headers,
   };
@@ -19,7 +19,7 @@ export const DetailJobRequest = async (
       },
     });
     const objects = response.data;
-    return objects;
+    return [objects];
   } catch (error) {
     console.error("Error:", error);
     throw error;
