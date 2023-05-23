@@ -9,9 +9,16 @@ export interface JobStoreStateI {
   currentPage: number;
   changeCurrentPage: (page: number) => void;
   totalCountPage: number;
+  checkRepeatPage: number;
+  changeRepeatPage: () => void;
   jobs: JobDataI[];
-  fetchJobs: (token: string, page: number, param: ParamsQueryI) => void;
-  fetchJobDetail: (token: string, id?: string) => Promise<JobDataI | undefined>;
+  fetchJobs: (
+    token: string,
+    page: number,
+    param: ParamsQueryI | number[],
+    isFavorite?: boolean,
+  ) => void;
+  fetchJobDetail: (token: string, id: string) => void;
   catalogues: IndustryI[];
   fetchCatalogues: (token: string) => void;
   keyword: string;
@@ -37,12 +44,23 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   currentPage: 1,
   changeCurrentPage: (page) => set({ currentPage: page }),
   totalCountPage: 125,
+  checkRepeatPage: -1,
+  changeRepeatPage: () => set({ checkRepeatPage: -1 }),
   loading: false,
   error: null,
   errorDetail: null,
   jobs: [],
-  fetchJobs: async (token, page, params) => {
-    set({ loading: true });
+  fetchJobs: async (token, page, params, isFavorite) => {
+    //эта проверка создана для того что если идет удаление из favorite
+    // то не нужно делать loading, а будет происиходить как бы плавный запрос
+    const repeatPage = get().checkRepeatPage;
+    if (!isFavorite) {
+      set({ loading: true });
+    } else if (repeatPage !== page) {
+      set({ checkRepeatPage: page });
+      set({ loading: true });
+    }
+
     try {
       const res = await JobRequest(token, page, params);
       if (!res) throw new Error("Failed to fetch! Try again.");
@@ -62,7 +80,9 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     try {
       const res = await DetailJobRequest(token, id);
       if (!res) throw new Error("Failed to fetch! Try again.");
-      return res;
+      set({
+        jobs: res,
+      });
     } catch (error: any) {
       set({ errorDetail: error.message });
     } finally {
