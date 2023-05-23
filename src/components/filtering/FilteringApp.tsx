@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Group,
   Button,
@@ -25,6 +25,12 @@ const FilteringAppMemo = () => {
   const handleClickAddParams = () => {
     addParams();
   };
+  //получение отраслей
+  const fetchCatalogues = useJobStore((state) => state.fetchCatalogues);
+  // для отраслей
+  useEffect(() => {
+    fetchCatalogues();
+  }, []);
   return (
     <>
       <Paper component="section" className={classes.container}>
