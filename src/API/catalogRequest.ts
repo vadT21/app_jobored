@@ -7,18 +7,14 @@ export const CatalogRequest = async (token: string): Promise<IndustryI[]> => {
     ...API_DATA.headers,
   };
   const url = `${API_DATA.base_url}/catalogues`;
-  try {
-    const response = await axios.get<IndustryI[]>(url, {
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${token}`,
-      },
-      params: {},
-    });
-    const objects = response.data;
-    return objects;
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
-  }
+  const response = await axios.get<IndustryI[]>(url, {
+     headers: {
+       ...headers,
+       Authorization: `Bearer ${token}`,
+     },
+     params: {},
+   });
+  const objects = response.data;
+  return objects;
+
 };
