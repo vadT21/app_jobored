@@ -36,18 +36,15 @@ export const JobRequest = async (
     queryParams["no_agreement"] = 1;
   }
 
-  try {
-    const response = await axios.get<JobRequestI>(url, {
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${token}`,
-      },
-      params: queryParams,
-    });
-    const objects = response.data;
-    return objects;
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
-  }
+  
+  const response = await axios.get<JobRequestI>(url, {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    },
+    params: queryParams,
+  });
+  const objects = response.data;
+  return objects;
+
 };
