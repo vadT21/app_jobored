@@ -48,7 +48,6 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     set({ loading: true });
     try {
       const res = await JobRequest(secretToken, page, params);
-      if (!res) throw new Error("Failed to fetch! Try again.");
       set({
         jobs: res.objects,
         totalCountPage: res.total / 4 > 125 ? 125 : Math.ceil(res.total / 4),
@@ -64,7 +63,6 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
     set({ loading: true });
     try {
       const res = await DetailJobRequest(secretToken, id);
-      if (!res) throw new Error("Failed to fetch! Try again.");
       set({
         jobs: res,
       });
@@ -78,7 +76,6 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   fetchCatalogues: async () => {
     try {
       const res = await CatalogRequest(secretToken);
-      if (!res) throw new Error("Failed to fetch! Try again.");
       set({ catalogues: res, error: null });
     } catch (error: any) {
       set({ error: error.message });
