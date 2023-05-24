@@ -11,17 +11,13 @@ export const DetailJobRequest = async (
   };
   const url = `${API_DATA.base_url}/vacancies/${id}`;
 
-  try {
-    const response = await axios.get<JobDataI>(url, {
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const objects = response.data;
-    return [objects];
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
-  }
+  
+  const response = await axios.get<JobDataI>(url, {
+     headers: {
+       ...headers,
+       Authorization: `Bearer ${token}`,
+     },
+   });
+  const objects = response.data;
+  return [objects];
 };
