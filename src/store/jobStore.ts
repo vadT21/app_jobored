@@ -34,7 +34,7 @@ interface ChoosenIndustryI {
   key?: number;
 }
 
-const secretToken = useTokenStore.getState().secretToken;
+
 
 export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   currentPage: 1,
@@ -47,6 +47,7 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   fetchJobs: async (page, params) => {
     set({ loading: true });
     try {
+      const secretToken = useTokenStore.getState().secretToken;
       const res = await JobRequest(secretToken, page, params);
       set({
         jobs: res.objects,
@@ -62,6 +63,7 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   fetchJobDetail: async (id) => {
     set({ loading: true });
     try {
+      const secretToken = useTokenStore.getState().secretToken;
       const res = await DetailJobRequest(secretToken, id);
       set({
         jobs: res,
@@ -75,6 +77,7 @@ export const useJobStore = create<JobStoreStateI>()((set, get) => ({
   catalogues: [],
   fetchCatalogues: async () => {
     try {
+      const secretToken = useTokenStore.getState().secretToken;
       const res = await CatalogRequest(secretToken);
       set({ catalogues: res, error: null });
     } catch (error: any) {
